@@ -12,9 +12,8 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-40 bg-white/95 backdrop-blur border-b border-slate-200">
       <div className="mx-auto max-w-5xl px-4 flex items-center justify-between h-24">
-        <NavLink to="/" className="flex items-center gap-3 shrink-0">
-          <img src="/logococimas.png" alt="Cocimas Hogar" className="h-16 w-auto object-contain" />
-          <span className="font-bold text-xl text-brand-dark hidden sm:inline">Cocimas Hogar</span>
+        <NavLink to="/" className="flex items-center shrink-0">
+          <img src="/logococimas.png" alt="Cocimas Hogar" className="h-20 w-auto object-contain" />
         </NavLink>
 
         <nav className="hidden md:flex items-center gap-1">
