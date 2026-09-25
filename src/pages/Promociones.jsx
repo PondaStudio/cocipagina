@@ -5,7 +5,7 @@ function PromoCard({ promo, agotada = false }) {
   return (
     <Link
       to={`/promociones/${promo.id}`}
-      className="group block overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm hover:shadow-md transition-shadow"
+      className="group block overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all"
     >
       <div className="aspect-[4/3] overflow-hidden bg-slate-100 relative">
         <img
@@ -22,9 +22,11 @@ function PromoCard({ promo, agotada = false }) {
           </span>
         )}
       </div>
-      <div className="p-3.5">
-        <span className="inline-block text-xs font-bold text-brand-blue">{promo.descuento}</span>
-        <p className="font-semibold text-brand-dark leading-snug mt-0.5">{promo.titulo}</p>
+      <div className="p-4">
+        <span className="inline-block rounded-full bg-brand-blue/10 text-brand-blue text-xs font-bold px-2.5 py-1">
+          {promo.descuento}
+        </span>
+        <p className="font-semibold text-brand-dark leading-snug mt-2">{promo.titulo}</p>
         <p className="text-xs text-slate-400 mt-1">{promo.marca}</p>
       </div>
     </Link>

@@ -19,7 +19,10 @@ const STATUS = {
   ERROR: 'error',
 }
 
-export default function EncuestaForm({ title = '¡Tu opinión nos importa!', className = '' }) {
+export default function EncuestaForm({
+  title = '¡Tu opinión nos importa!',
+  className = 'mx-auto max-w-md px-4',
+}) {
   const [sucursalCodigo, setSucursalCodigo] = useState('')
   const [vendedora, setVendedora] = useState('')
   const [calificacion, setCalificacion] = useState('')
@@ -72,7 +75,7 @@ export default function EncuestaForm({ title = '¡Tu opinión nos importa!', cla
 
   if (status === STATUS.SUCCESS) {
     return (
-      <div className={`mx-auto max-w-md px-4 text-center ${className}`}>
+      <div className={`${className} text-center`}>
         <div className="text-5xl mb-4">🎉</div>
         <h2 className="text-2xl font-bold text-brand-dark">¡Gracias por tu opinión!</h2>
         <p className="text-slate-500 mt-2">Tu feedback nos ayuda a mejorar cada día.</p>
@@ -110,7 +113,7 @@ export default function EncuestaForm({ title = '¡Tu opinión nos importa!', cla
   }
 
   return (
-    <div className={`mx-auto max-w-md px-4 ${className}`}>
+    <div className={`${className}`}>
       <h2 className="text-2xl font-bold text-brand-dark">{title}</h2>
       <p className="text-slate-500 mt-1 mb-8">
         Ayúdanos a mejorar compartiendo tu experiencia de compra.
@@ -166,8 +169,8 @@ export default function EncuestaForm({ title = '¡Tu opinión nos importa!', cla
                 onClick={() => setCalificacion(c.value)}
                 className={`flex flex-col items-center gap-1 rounded-xl border-2 py-4 font-semibold transition-all ${
                   calificacion === c.value
-                    ? c.color
-                    : 'border-slate-200 text-slate-500 hover:border-slate-300'
+                    ? `${c.color} shadow-md scale-105`
+                    : 'border-slate-200 text-slate-500 hover:border-slate-300 hover:-translate-y-0.5'
                 }`}
               >
                 <span className="text-2xl">{c.emoji}</span>
@@ -204,7 +207,7 @@ export default function EncuestaForm({ title = '¡Tu opinión nos importa!', cla
         <button
           type="submit"
           disabled={status === STATUS.SENDING}
-          className="w-full rounded-xl bg-brand-blue text-white font-semibold py-3.5 hover:bg-sky-600 active:scale-[0.99] transition-all disabled:opacity-60 disabled:pointer-events-none"
+          className="w-full rounded-xl bg-brand-blue text-white font-semibold py-3.5 shadow-md shadow-brand-blue/20 hover:bg-sky-600 hover:shadow-lg hover:shadow-brand-blue/30 active:scale-[0.99] transition-all disabled:opacity-60 disabled:pointer-events-none disabled:shadow-none"
         >
           {status === STATUS.SENDING ? 'Enviando...' : 'Enviar calificación'}
         </button>
