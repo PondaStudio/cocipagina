@@ -4,8 +4,8 @@
 export const SUCURSALES = [
   {
     codigo: 'JM437',
-    nombre: 'Javier Mina 437',
-    direccion: 'Javier Mina 437, Guadalajara, Jal.',
+    nombre: 'Javier Mina 443',
+    direccion: 'Javier Mina 443, Guadalajara, Jal.',
     horario: 'Lun a Sáb 10:00–20:00, Dom 11:00–17:00',
     mapsReviewUrl: 'https://g.page/r/PLACEHOLDER_JM437/review',
     facturacionTelefono: '3334718271',
@@ -51,8 +51,8 @@ export const SUCURSALES = [
   },
   {
     codigo: 'LV167',
-    nombre: 'Leona Vicario 167',
-    direccion: 'Leona Vicario 167, Guadalajara, Jal.',
+    nombre: 'Leona Vicario 147',
+    direccion: 'Leona Vicario 147, Guadalajara, Jal.',
     horario: 'Lun a Sáb 10:00–20:00, Dom 11:00–17:00',
     mapsReviewUrl: 'https://g.page/r/PLACEHOLDER_LV167/review',
     facturacionTelefono: '3331774615',
