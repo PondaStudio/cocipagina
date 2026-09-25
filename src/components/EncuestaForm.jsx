@@ -1,11 +1,10 @@
 import { useMemo, useState } from 'react'
 import { SUCURSALES, GOOGLE_REVIEW_DEFAULT_URL, REDES_SOCIALES } from '../config/sucursales.js'
 
-// TODO(dueño): reemplaza con la URL real de tu Google Apps Script Web App
-// (Extensiones > Apps Script > Implementar > Aplicación web, en el Sheet).
 // El Web App corre con la autorización del propio script, así que no expone
 // ninguna API key en el navegador del cliente.
-const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/PLACEHOLDER_DEPLOYMENT_ID/exec'
+const GOOGLE_SCRIPT_URL =
+  'https://script.google.com/macros/s/AKfycbyL8w4T31zYjOJJddqbtCz9r-855iu6ADWwpSfvJeayvOT1pynbPUD0nd5kYvEO1y3S/exec'
 
 const CALIFICACIONES = [
   { value: 'bueno', label: 'Bueno', emoji: '😀', color: 'border-green-500 bg-green-50 text-green-700' },
