@@ -143,22 +143,14 @@ export default function EncuestaForm({ title = '¡Tu opinión nos importa!', cla
           <label htmlFor="vendedora" className="block text-sm font-semibold text-slate-700 mb-1.5">
             ¿Quién te atendió? <span className="font-normal text-slate-400">(opcional)</span>
           </label>
-          <select
+          <input
+            type="text"
             id="vendedora"
             value={vendedora}
             onChange={(e) => setVendedora(e.target.value)}
-            disabled={!sucursal}
-            className="w-full rounded-xl border border-slate-300 px-4 py-3 text-base focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/30 outline-none transition-shadow disabled:bg-slate-100 disabled:text-slate-400"
-          >
-            <option value="">
-              {sucursal ? 'Selecciona...' : 'Primero elige una sucursal'}
-            </option>
-            {sucursal?.vendedoras.map((v) => (
-              <option key={v.nombre} value={v.nombre}>
-                {v.nombre}
-              </option>
-            ))}
-          </select>
+            placeholder="Nombre de quien te atendió"
+            className="w-full rounded-xl border border-slate-300 px-4 py-3 text-base focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/30 outline-none transition-shadow"
+          />
         </div>
 
         <div>
