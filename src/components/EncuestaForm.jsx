@@ -46,12 +46,14 @@ export default function EncuestaForm({ title = '¡Tu opinión nos importa!', cla
 
     setStatus(STATUS.SENDING)
 
+    // Nombres de campo iguales a los que ya espera el Google Apps Script
+    // Web App existente (el mismo que usaba el sitio legacy).
     const payload = new FormData()
     payload.append('sucursal', sucursal?.nombre ?? sucursalCodigo)
     payload.append('sucursalCodigo', sucursalCodigo)
-    payload.append('empleado', vendedora)
-    payload.append('calificacion', calificacion)
-    payload.append('sugerencias', sugerencias)
+    payload.append('employeeName', vendedora)
+    payload.append('rating', calificacion)
+    payload.append('suggestions', sugerencias)
     payload.append('fecha', new Date().toISOString())
 
     try {
