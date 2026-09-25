@@ -30,14 +30,14 @@ export default function Contacto() {
         facturación.
       </p>
 
-      <section className="rounded-xl bg-white border border-slate-200 shadow-sm px-5 py-5 mb-8">
+      <section className="rounded-2xl bg-white border border-slate-200 shadow-sm hover:shadow-md transition-shadow px-5 py-5 mb-8">
         <h2 className="font-bold text-brand-dark mb-3">Facturación</h2>
         <div className="flex flex-wrap gap-3">
           {facturacionTelefonos.map((tel) => (
             <button
               key={tel}
               onClick={() => copiar(tel)}
-              className="flex items-center gap-2 rounded-lg border border-slate-200 px-4 py-2.5 font-mono text-sm text-slate-700 hover:border-brand-blue hover:text-brand-blue transition-colors"
+              className="flex items-center gap-2 rounded-full border border-slate-200 px-4 py-2.5 font-mono text-sm text-slate-700 hover:border-brand-blue hover:text-brand-blue hover:shadow-sm transition-all"
             >
               📞 {tel}
               {copiado === tel && <span className="text-xs text-green-600">¡Copiado!</span>}
@@ -48,7 +48,10 @@ export default function Contacto() {
 
       <section className="space-y-4">
         {SUCURSALES.map((s) => (
-          <div key={s.codigo} className="rounded-xl border border-slate-200 bg-white shadow-sm px-5 py-4">
+          <div
+            key={s.codigo}
+            className="rounded-2xl border border-slate-200 bg-white shadow-sm hover:shadow-md transition-shadow px-5 py-5"
+          >
             <div className="flex items-baseline justify-between gap-2 flex-wrap">
               <h2 className="font-bold text-brand-dark">{s.nombre}</h2>
               <span className="text-xs font-mono text-slate-400">{s.codigo}</span>
@@ -63,7 +66,7 @@ export default function Contacto() {
                   href={waLink(v.whatsapp, `Hola, te escribo desde la página de Cocimas Hogar (${s.nombre}).`)}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center gap-1.5 rounded-full bg-green-50 text-green-700 border border-green-200 px-3.5 py-1.5 text-sm font-medium hover:bg-green-100 transition-colors"
+                  className="inline-flex items-center gap-1.5 rounded-full bg-green-50 text-green-700 border border-green-200 px-3.5 py-1.5 text-sm font-medium hover:bg-green-100 hover:shadow-sm transition-all"
                 >
                   💬 {v.nombre}
                 </a>

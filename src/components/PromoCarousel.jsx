@@ -17,7 +17,7 @@ export default function PromoCarousel({ promos }) {
 
   return (
     <div className="relative">
-      <div className="overflow-hidden rounded-2xl border border-slate-200 shadow-sm bg-white">
+      <div className="overflow-hidden rounded-2xl border border-slate-200 shadow-lg shadow-slate-200/50 bg-white">
         <div
           className="flex transition-transform duration-500 ease-out"
           style={{ transform: `translateX(-${index * 100}%)` }}

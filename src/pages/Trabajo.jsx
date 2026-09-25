@@ -19,7 +19,10 @@ export default function Trabajo() {
 
       <div className="space-y-4">
         {VACANTES.map((v, i) => (
-          <div key={i} className="rounded-xl border border-slate-200 bg-white shadow-sm px-5 py-5">
+          <div
+            key={i}
+            className="rounded-2xl border border-slate-200 bg-white shadow-sm hover:shadow-md transition-shadow px-5 py-5"
+          >
             <div className="flex items-start justify-between gap-3 flex-wrap">
               <div>
                 <h2 className="font-bold text-lg text-brand-dark">{v.puesto}</h2>
@@ -43,7 +46,7 @@ export default function Trabajo() {
               href={contactoLink(v.contacto, v)}
               target="_blank"
               rel="noreferrer"
-              className="mt-4 inline-flex items-center gap-2 rounded-lg bg-brand-blue text-white font-semibold px-4 py-2.5 text-sm hover:bg-sky-600 transition-colors"
+              className="mt-4 inline-flex items-center gap-2 rounded-full bg-brand-blue text-white font-semibold px-5 py-2.5 text-sm shadow-sm hover:bg-sky-600 hover:shadow-md transition-all"
             >
               {v.contacto.tipo === 'whatsapp' ? '💬 Contactar por WhatsApp' : '✉️ Enviar email'}
             </a>

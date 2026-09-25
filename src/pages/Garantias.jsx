@@ -34,7 +34,7 @@ export default function Garantias() {
         {GARANTIAS.map((g) => (
           <div
             key={g.titulo}
-            className={`rounded-xl border-l-4 ${g.color} bg-white shadow-sm px-5 py-4`}
+            className={`rounded-2xl border-l-4 ${g.color} bg-white shadow-sm hover:shadow-md transition-shadow px-5 py-5`}
           >
             <span className="inline-block text-xs font-bold uppercase tracking-wide text-slate-400">
               {g.plazo}
@@ -45,7 +45,7 @@ export default function Garantias() {
         ))}
       </section>
 
-      <section className="mt-10 rounded-xl bg-brand-dark text-white px-5 py-6">
+      <section className="mt-10 rounded-2xl bg-gradient-to-br from-brand-dark to-slate-800 text-white px-6 py-8 shadow-lg">
         <h2 className="font-bold text-lg">Política de "no cambios"</h2>
         <p className="text-slate-200 text-sm mt-2 leading-relaxed">
           En Cocimas Hogar nos esforzamos porque cada producto llegue en perfectas condiciones y
