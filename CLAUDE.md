@@ -26,7 +26,7 @@ Sucursales existentes (mismos códigos que en el ERP interno CocimasApp): JM437,
 
 ## Datos: Google Sheets, no base de datos
 
-La encuesta de satisfacción escribe directo a un Google Sheet (no Supabase, no MySQL). La API key/credenciales de Google se manejan como variable de entorno / GitHub Secret — **nunca hardcodeadas en el código ni commiteadas**.
+La encuesta de satisfacción escribe directo a un Google Sheet (no Supabase, no MySQL). La API key ya existe como GitHub Secret: `GOOGLE_SHEETS_API_KEY`. Referénciala en el workflow/build (`${{ secrets.GOOGLE_SHEETS_API_KEY }}` o como env var inyectada en build) — **nunca la hardcodees en el código ni la commitees**.
 
 ## Despliegue (GitHub Actions → FTP Hostinger)
 
