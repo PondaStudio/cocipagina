@@ -1,21 +1,20 @@
 import { NavLink } from 'react-router-dom'
 
+// Garantías, Contacto y Bolsa de trabajo quedan ocultas del menú por ahora
+// (a petición del dueño) pero sus rutas siguen accesibles por URL directa.
 const LINKS = [
   { to: '/', label: 'Inicio', end: true },
   { to: '/encuesta', label: 'Encuesta' },
   { to: '/promociones', label: 'Promociones' },
-  { to: '/garantias', label: 'Garantías' },
-  { to: '/contacto', label: 'Contacto' },
-  { to: '/trabajo', label: 'Bolsa de trabajo' },
 ]
 
 export default function Header() {
   return (
     <header className="sticky top-0 z-40 bg-white/95 backdrop-blur border-b border-slate-200">
-      <div className="mx-auto max-w-5xl px-4 flex items-center justify-between h-16">
-        <NavLink to="/" className="flex items-center gap-2 shrink-0">
-          <img src="/logococimas.png" alt="Cocimas Hogar" className="h-10 w-auto object-contain" />
-          <span className="font-bold text-lg text-brand-dark hidden sm:inline">Cocimas Hogar</span>
+      <div className="mx-auto max-w-5xl px-4 flex items-center justify-between h-24">
+        <NavLink to="/" className="flex items-center gap-3 shrink-0">
+          <img src="/logococimas.png" alt="Cocimas Hogar" className="h-16 w-auto object-contain" />
+          <span className="font-bold text-xl text-brand-dark hidden sm:inline">Cocimas Hogar</span>
         </NavLink>
 
         <nav className="hidden md:flex items-center gap-1">
