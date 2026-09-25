@@ -1,0 +1,1329 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+    <!-- Apple iOS Meta Tags para PWA -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Cocimas Hogar">
+    <link rel="apple-touch-icon" sizes="180x180" href="logococimas.png">
+    <link rel="apple-touch-icon" sizes="167x167" href="logococimas.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="logococimas.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="logococimas.png">
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#1E88E5">
+    <!-- Título y descripción -->
+    <title>Califica nuestros servicios - Cocimas Hogar</title>
+     <!-- Título y descripción -->
+    <title>Califica nuestros servicios - Cocimas Hogar</title>
+    <meta name="description" content="Comparte tu experiencia con Cocimas Hogar. Tu opinión nos ayuda a mejorar nuestros servicios y atención al cliente.">
+    
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="logococimas.png">
+    <link rel="shortcut icon" type="image/png" href="logococimas.png">
+    <link rel="apple-touch-icon" href="logococimas.png">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://cocimashogargdl.com/">
+    <meta property="og:title" content="Califica nuestros servicios - Cocimas Hogar">
+    <meta property="og:description" content="Comparte tu experiencia con Cocimas Hogar. Tu opinión nos ayuda a mejorar nuestros servicios y atención al cliente.">
+    <meta property="og:image" content="https://cocimashogargdl.com/logococimas.png">
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1E88E5 0%, #1976D2 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 12px;
+            height: 0px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #FFD700, #FFC107);
+            border-radius: 10px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #FFC107, #FF9800);
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+        }
+
+        * {
+            scrollbar-width: thin;
+            scrollbar-color: #FFD700 rgba(255, 255, 255, 0.1);
+            overflow-x: hidden;
+        }
+
+        /* Intro Screen */
+        .intro-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #1E88E5 0%, #1976D2 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            animation: fadeOutIntro 0.8s ease-in-out 3.5s forwards;
+        }
+
+        .intro-logo {
+            width: 250px;
+            height: 180px;
+            background: url('logococimas.png') no-repeat center center;
+            background-size: contain;
+            animation: logoIntro 3.5s ease-in-out forwards;
+            transform-style: preserve-3d;
+        }
+
+        @keyframes logoIntro {
+            0% {
+                transform: scale(0) rotateY(0deg);
+                opacity: 0;
+            }
+            15% {
+                transform: scale(1.2) rotateY(0deg);
+                opacity: 1;
+            }
+            30% {
+                transform: scale(1) rotateY(0deg);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1) rotateY(360deg);
+                opacity: 1;
+            }
+            70% {
+                transform: scale(1) rotateY(720deg);
+                opacity: 1;
+            }
+            85% {
+                transform: scale(1.1) rotateY(720deg) translateZ(0px);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(2) rotateY(720deg) translateZ(500px);
+                opacity: 0;
+            }
+        }
+
+        @keyframes fadeOutIntro {
+            0% { opacity: 1; }
+            100% { 
+                opacity: 0;
+                visibility: hidden;
+            }
+        }
+
+        /* Main content */
+        .main-content {
+            opacity: 0;
+            animation: fadeInMain 0.8s ease-out 3.8s forwards;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            width: 100%;
+            max-width: 500px;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Animated Bubbles Background */
+        .bubbles-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+            pointer-events: none;
+            animation: bubblesAppear 0.5s ease-out forwards;
+        }
+
+        .bubble {
+            position: absolute;
+            bottom: -100px;
+            background: rgba(255, 255, 255, 0.3);
+            border: 2px solid rgba(255, 215, 0, 0.4);
+            border-radius: 50%;
+            opacity: 0.8;
+            animation: bubbleFloat 15s infinite linear;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+        }
+
+        .bubble:nth-child(1) {
+            width: 40px;
+            height: 40px;
+            left: 10%;
+            animation-delay: 0s;
+            background: rgba(255, 215, 0, 0.4);
+            border: 2px solid rgba(255, 255, 255, 0.6);
+        }
+
+        .bubble:nth-child(2) {
+            width: 20px;
+            height: 20px;
+            left: 20%;
+            animation-delay: 2s;
+            animation-duration: 12s;
+            background: rgba(255, 255, 255, 0.4);
+            border: 2px solid rgba(30, 136, 229, 0.5);
+        }
+
+        .bubble:nth-child(3) {
+            width: 50px;
+            height: 50px;
+            left: 35%;
+            animation-delay: 4s;
+            background: rgba(30, 136, 229, 0.3);
+            border: 2px solid rgba(255, 215, 0, 0.6);
+        }
+
+        .bubble:nth-child(4) {
+            width: 80px;
+            height: 80px;
+            left: 50%;
+            animation-delay: 0s;
+            animation-duration: 18s;
+            background: rgba(255, 215, 0, 0.25);
+            border: 2px solid rgba(255, 255, 255, 0.4);
+        }
+
+        .bubble:nth-child(5) {
+            width: 35px;
+            height: 35px;
+            left: 70%;
+            animation-delay: 1s;
+            background: rgba(255, 255, 255, 0.35);
+            border: 2px solid rgba(30, 136, 229, 0.6);
+        }
+
+        .bubble:nth-child(6) {
+            width: 45px;
+            height: 45px;
+            left: 80%;
+            animation-delay: 3s;
+            animation-duration: 16s;
+            background: rgba(30, 136, 229, 0.2);
+            border: 2px solid rgba(255, 215, 0, 0.7);
+        }
+
+        .bubble:nth-child(7) {
+            width: 25px;
+            height: 25px;
+            left: 32%;
+            animation-delay: 7s;
+            background: rgba(255, 215, 0, 0.4);
+            border: 2px solid rgba(255, 255, 255, 0.5);
+        }
+
+        .bubble:nth-child(8) {
+            width: 90px;
+            height: 90px;
+            left: 55%;
+            animation-delay: 15s;
+            animation-duration: 20s;
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(30, 136, 229, 0.4);
+        }
+
+        .bubble:nth-child(9) {
+            width: 15px;
+            height: 15px;
+            left: 25%;
+            animation-delay: 2s;
+            animation-duration: 10s;
+            background: rgba(30, 136, 229, 0.5);
+            border: 2px solid rgba(255, 215, 0, 0.8);
+        }
+
+        .bubble:nth-child(10) {
+            width: 60px;
+            height: 60px;
+            left: 85%;
+            animation-delay: 11s;
+            background: rgba(255, 215, 0, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.6);
+        }
+
+        @keyframes bubblesAppear {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        @keyframes bubbleFloat {
+            0% {
+                bottom: -100px;
+                transform: translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                bottom: 1080px;
+                transform: translateX(-200px);
+                opacity: 0;
+            }
+        }
+
+        .floating-elements {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .floating-circle {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .floating-circle:nth-child(1) {
+            width: 80px;
+            height: 80px;
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .floating-circle:nth-child(2) {
+            width: 120px;
+            height: 120px;
+            top: 60%;
+            right: 10%;
+            animation-delay: 2s;
+        }
+
+        .floating-circle:nth-child(3) {
+            width: 60px;
+            height: 60px;
+            top: 80%;
+            left: 20%;
+            animation-delay: 4s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+            overflow-y: auto;
+            max-height: 90vh;
+            animation: slideIn 0.8s ease-out;
+        }
+
+        /* ⭐ BOTÓN SISTEMA EXPERTO - ESQUINA SUPERIOR DERECHA ⭐ */
+        .expert-system-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            padding: 6px 12px;
+            background: transparent;
+            color: #999;
+            text-decoration: none;
+            border-radius: 20px;
+            font-weight: 500;
+            font-size: 11px;
+            transition: all 0.3s ease;
+            z-index: 100;
+            cursor: pointer;
+            border: none;
+        }
+
+        .expert-system-btn:hover {
+            color: #666;
+        }
+
+        .expert-system-btn:active {
+            color: #999;
+        }
+
+        .expert-system-btn i {
+            font-size: 13px;
+            color: #999;
+        }
+
+        .expert-system-btn:hover i {
+            color: #666;
+        }
+
+        .expert-system-btn span {
+            display: inline;
+        }
+
+        /* Nueva sección de mayoreo */
+        .mayoreo-container {
+            background: rgba(255, 255, 255, 1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            padding: 30px;
+            text-align: center;
+            position: relative;
+            animation: slideIn 0.8s ease-out;
+            animation-delay: 0.2s;
+            animation-fill-mode: both;
+        }
+
+        .mayoreo-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            animation: shine 3s infinite;
+            animation-delay: 0.5s;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .logo {
+            width: 200px;
+            height: 120px;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: pulse 2s infinite;
+            background: url('logococimas.png') no-repeat center center;
+            background-size: contain;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 28px;
+            font-weight: 700;
+        }
+
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
+        /* Estilos para la sección de mayoreo */
+        .mayoreo-title {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .phone-numbers {
+            margin: 20px 0;
+        }
+
+        .phone-number {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 15px 20px;
+            margin: 10px 0;
+            background: rgba(30, 136, 229, 0.1);
+            border: 2px solid rgba(30, 136, 229, 0.3);
+            border-radius: 15px;
+            font-size: 18px;
+            font-weight: 600;
+            color: #1976D2;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            user-select: none;
+            position: relative;
+        }
+
+        .phone-number:hover {
+            background: rgba(30, 136, 229, 0.2);
+            border-color: #1E88E5;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(30, 136, 229, 0.3);
+        }
+
+        .phone-number:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 8px rgba(30, 136, 229, 0.4);
+        }
+
+        .phone-number::after {
+            content: "📋 Toca para copiar";
+            position: absolute;
+            right: 15px;
+            font-size: 12px;
+            color: rgba(25, 118, 210, 0.7);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .phone-number:hover::after {
+            opacity: 1;
+        }
+
+        .whatsapp-btn {
+            display: inline-block;
+            padding: 15px 30px;
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+            border: 2px solid #FFD700;
+            cursor: pointer;
+        }
+
+        .whatsapp-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(37, 211, 102, 0.4);
+            border-color: #FFC107;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        input[type="text"], input[type="email"], select {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e1e1e1;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        input[type="text"]:focus, input[type="email"]:focus, select:focus {
+            outline: none;
+            border-color: #1E88E5;
+            box-shadow: 0 0 0 3px rgba(30, 136, 229, 0.2);
+            transform: translateY(-2px);
+        }
+
+        select {
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 15px center;
+            background-size: 16px;
+            padding-right: 45px;
+        }
+
+        select:focus {
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231E88E5' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
+        }
+
+        .rating-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .rating-option {
+            flex: 1;
+            position: relative;
+        }
+
+        .rating-option input[type="radio"] {
+            display: none;
+        }
+
+        .rating-label {
+            display: block;
+            padding: 15px 8px;
+            background: #f8f9fa;
+            border: 2px solid #e1e1e1;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 12px;
+            font-weight: 600;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .rating-option input[type="radio"]:checked + .rating-label {
+            background: linear-gradient(135deg, #1E88E5, #1976D2);
+            color: white;
+            border-color: #FFD700;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(30, 136, 229, 0.4);
+        }
+
+        .rating-label:hover {
+            transform: translateY(-2px);
+            border-color: #1E88E5;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e1e1e1;
+            border-radius: 10px;
+            font-size: 16px;
+            resize: vertical;
+            min-height: 100px;
+            font-family: inherit;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: #1E88E5;
+            box-shadow: 0 0 0 3px rgba(30, 136, 229, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .checkbox-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 15px;
+            padding: 15px;
+            background: rgba(30, 136, 229, 0.05);
+            border-radius: 10px;
+            border: 1px solid rgba(30, 136, 229, 0.2);
+        }
+
+        .checkbox-container input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            accent-color: #1E88E5;
+            cursor: pointer;
+        }
+
+        .checkbox-container label {
+            margin: 0;
+            cursor: pointer;
+            color: #555;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, #1E88E5, #1976D2);
+            border: 2px solid #FFD700;
+            color: white;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            margin-top: 20px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(30, 136, 229, 0.4);
+            border-color: #FFC107;
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .thank-you {
+            display: none;
+            animation: fadeInMain 0.5s ease-out;
+        }
+
+        @keyframes fadeInMain {
+            0% { 
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            100% { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .social-section {
+            margin-top: 30px;
+            padding-top: 30px;
+            border-top: 2px solid #e1e1e1;
+        }
+
+        .social-title {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .social-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 25px;
+        }
+
+        .social-btn {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            color: white;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .facebook-btn {
+            background: linear-gradient(135deg, #1877f2, #42a5f5);
+        }
+
+        .instagram-btn {
+            background: linear-gradient(135deg, #e4405f, #fccc63);
+        }
+
+        .social-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .google-review-btn {
+            display: inline-block;
+            padding: 15px 30px;
+            background: linear-gradient(135deg, #4285f4, #34a853);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .google-review-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(66, 133, 244, 0.3);
+        }
+
+        .stars {
+            color: #ffd700;
+            margin-bottom: 15px;
+            font-size: 24px;
+            animation: twinkle 2s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        .error-message {
+            color: #e74c3c;
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .cooldown-message {
+            background: #d1ecf1;
+            border: 1px solid #bee5eb;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            color: #0c5460;
+            text-align: center;
+            display: none;
+        }
+
+        /* Mensaje de número copiado */
+        .copy-notification {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, #28a745, #20c997);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 16px;
+            box-shadow: 0 10px 25px rgba(40, 167, 69, 0.4);
+            z-index: 10000;
+            display: none;
+            animation: slideInTop 0.3s ease-out;
+            border: 2px solid #FFD700;
+        }
+
+        .copy-notification.show {
+            display: block;
+            animation: slideInTop 0.3s ease-out;
+        }
+
+        .copy-notification.hide {
+            animation: slideOutTop 0.3s ease-in forwards;
+        }
+
+        @keyframes slideInTop {
+            0% {
+                opacity: 0;
+                transform: translateX(-50%) translateY(-50px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+
+        @keyframes slideOutTop {
+            0% {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
+            100% {
+                opacity: 0;
+                transform: translateX(-50%) translateY(-50px);
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
+            .main-content {
+                gap: 15px;
+            }
+
+            .container, .mayoreo-container {
+                padding: 30px 20px;
+                margin: 0;
+            }
+
+            /* Ajuste para botón en móvil */
+            .expert-system-btn {
+                top: 8px;
+                right: 8px;
+                padding: 5px 10px;
+                font-size: 10px;
+                gap: 4px;
+            }
+
+            .expert-system-btn span {
+                display: none; /* Ocultar texto en móvil */
+            }
+
+            .expert-system-btn i {
+                font-size: 14px;
+                margin: 0;
+            }
+
+            .rating-container {
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .rating-label {
+                padding: 12px;
+                font-size: 14px;
+            }
+
+            .social-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .social-btn {
+                width: 100%;
+                max-width: 200px;
+                justify-content: center;
+            }
+
+            .phone-number {
+                font-size: 16px;
+                padding: 12px 15px;
+            }
+
+            .mayoreo-title {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Bubbles Background -->
+    <div class="bubbles-container">
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+    </div>
+
+    <!-- Intro Screen -->
+    <div class="intro-screen" id="introScreen">
+        <div class="intro-logo"></div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="floating-elements">
+            <div class="floating-circle"></div>
+            <div class="floating-circle"></div>
+            <div class="floating-circle"></div>
+        </div>
+
+        <div class="container">
+            <!-- ⭐ BOTÓN SISTEMA RH - Solo para empleados ⭐ -->
+            <a href="sistema_RH/login/" class="expert-system-btn" title="Acceso para empleados">
+                <i class="fas fa-lightbulb"></i>
+                <span>Sistema Experto</span>
+            </a>
+
+            <div class="logo"></div>
+            
+            <h1>¡Tu opinión nos importa!</h1>
+            <p class="subtitle">Ayúdanos a mejorar nuestros servicios compartiendo tu experiencia</p>
+            
+            <div class="cooldown-message" id="cooldownMessage">
+                <i class="fas fa-check-circle"></i>
+                <h3>¡Gracias por su calificación!</h3>
+                <p>Acabas de calificarnos. Espere 1 minuto para enviar otra.</p>
+            </div>
+
+            <form id="ratingForm">
+                <div class="form-group">
+                    <label for="employeeName">
+                        <i class="fas fa-pencil-alt"></i> ¿Quién te atendió?
+                    </label>
+                    <input type="text" id="employeeName" name="employeeName" placeholder="Nombre del empleado" required>
+                    <div class="error-message" id="nameError">Por favor ingresa el nombre del empleado</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="sucursal">
+                        <i class="fas fa-store"></i> ¿En qué sucursal compraste?
+                    </label>
+                    <select id="sucursal" name="sucursal" required>
+                        <option value="">Selecciona una sucursal...</option>
+                        <option value="Javier Mina 453-B">Javier Mina 453-B</option>
+                        <option value="Javier Mina 511-A">Javier Mina 511-A</option>
+                        <option value="Leona Vicario 147">Leona Vicario 147</option>
+                        <option value="Leona Vicario 168">Leona Vicario 168</option>
+                        <option value="Juan Diaz Covarrubias 142">Juan Diaz Covarrubias 142</option>
+                        <option value="No sé en qué tienda compré">No sé en qué tienda compré</option>
+                    </select>
+                    <div class="error-message" id="sucursalError">Por favor selecciona una sucursal</div>
+                </div>
+
+                <div class="form-group">
+                    <label>
+                        <i class="fas fa-star"></i> ¿Cómo fue la atención?
+                    </label>
+                    <div class="rating-container">
+                        <div class="rating-option">
+                            <input type="radio" id="muy-mala" name="rating" value="muy-mala" required>
+                            <label for="muy-mala" class="rating-label">Muy Mala</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" id="mala" name="rating" value="mala">
+                            <label for="mala" class="rating-label">Mala</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" id="regular" name="rating" value="regular">
+                            <label for="regular" class="rating-label">Regular</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" id="buena" name="rating" value="buena">
+                            <label for="buena" class="rating-label">Buena</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" id="excelente" name="rating" value="excelente">
+                            <label for="excelente" class="rating-label">Excelente</label>
+                        </div>
+                    </div>
+                    <div class="error-message" id="ratingError">Por favor selecciona una calificación</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="suggestions">
+                        <i class="fas fa-comment"></i> ¿Alguna sugerencia más?
+                    </label>
+                    <textarea id="suggestions" name="suggestions" placeholder="Comparte tus comentarios o sugerencias (opcional)..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="customerEmail">
+                        <i class="fas fa-envelope"></i> Tu email (opcional)
+                    </label>
+                    <input type="email" id="customerEmail" name="customerEmail" placeholder="ejemplo@correo.com">
+                    
+                    <div class="checkbox-container">
+                        <input type="checkbox" id="notifications" name="notifications">
+                        <label for="notifications">
+                            <i class="fas fa-bell"></i> Quiero recibir notificaciones sobre nuevos productos y ofertas
+                        </label>
+                    </div>
+                </div>
+
+                <button type="submit" class="submit-btn">
+                    <i class="fas fa-paper-plane"></i> Enviar Calificación
+                </button>
+            </form>
+
+            <div class="thank-you" id="thankYouSection">
+                <div class="stars">
+                    ⭐⭐⭐⭐⭐
+                </div>
+                <h2>¡Gracias por tu opinión!</h2>
+                <p>Tu feedback es muy valioso para nosotros</p>
+                
+                <div class="social-section">
+                    <h3 class="social-title">Síguenos en redes sociales</h3>
+                    <p>Entérate de nuestros nuevos productos y ofertas</p>
+                    
+                    <div class="social-buttons">
+                        <a href="https://www.facebook.com/profile.php?id=61581038925331" class="social-btn facebook-btn" target="_blank">
+                            <i class="fab fa-facebook-f"></i>
+                            Facebook
+                        </a>
+                        <a href="https://www.instagram.com/cocimashogargdl/" class="social-btn instagram-btn" target="_blank">
+                            <i class="fab fa-instagram"></i>
+                            Instagram
+                        </a>
+                    </div>
+                    
+                    <p style="margin-top: 20px; color: #666;">También puedes calificarnos en:</p>
+                    <a href="https://www.google.com/search?sca_esv=0a74b9f5a5d821da&cs=1&output=search&kgmid=/g/1ptw03w42&q=Cocimas+Hogar&shndl=30&shem=lcuae,lsptbl1c,uaasie&source=sh/x/loc/uni/m1/1&kgs=2340a387e354ea77&utm_source=lcuae,lsptbl1c,uaasie,sh/x/loc/uni/m1/1#lrd=0x8428b18c9645705b:0x88f2a4b250e42c3d,3,,,," class="google-review-btn" target="_blank">
+                        <i class="fab fa-google"></i> Dejar reseña en Google
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Nueva Sección de Mayoreo -->
+        <div class="mayoreo-container">
+            <h2 class="mayoreo-title">
+                <i class="fas fa-truck"></i> Números para los pedidos a mayoreo
+            </h2>
+            
+            <div class="phone-numbers">
+                <div class="phone-number" onclick="copyToClipboard('3334718271')" data-phone="3334718271">
+                    <i class="fas fa-phone"></i>
+                    <span>3334718271</span>
+                </div>
+                <div class="phone-number" onclick="copyToClipboard('3331774615')" data-phone="3331774615">
+                    <i class="fas fa-phone"></i>
+                    <span>3331774615</span>
+                </div>
+            </div>
+
+            <a href="https://wa.me/qr/BOFBV7FUWLBTP1" class="whatsapp-btn" id="whatsappBtn" target="_blank">
+                <i class="fab fa-whatsapp"></i> Contactar por WhatsApp
+            </a>
+        </div>
+            
+    </div>
+
+    <!-- Mensaje de notificación para número copiado -->
+    <div class="copy-notification" id="copyNotification">
+        <i class="fas fa-check-circle"></i> <span id="notificationText">Número copiado al portapapeles</span>
+    </div>
+
+    <script>
+        // URL de Google Sheets
+        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyL8w4T31zYjOJJddqbtCz9r-855iu6ADWwpSfvJeayvOT1pynbPUD0nd5kYvEO1y3S/exec';
+
+        // Funciones de cooldown - 1 MINUTO
+        function canSubmitReview() {
+            const lastSubmission = localStorage.getItem('lastReviewSubmission');
+            if (!lastSubmission) return true;
+            
+            const now = new Date().getTime();
+            const oneMinute = 1 * 60 * 1000;
+            return (now - parseInt(lastSubmission)) > oneMinute;
+        }
+
+        function showCooldownMessage() {
+            const lastSubmission = localStorage.getItem('lastReviewSubmission');
+            if (!lastSubmission) return false;
+            
+            const now = new Date().getTime();
+            const oneMinute = 1 * 60 * 1000;
+            const timeRemaining = oneMinute - (now - parseInt(lastSubmission));
+            
+            if (timeRemaining > 0) {
+                document.getElementById('cooldownMessage').style.display = 'block';
+                document.getElementById('ratingForm').style.display = 'none';
+                return true;
+            }
+            return false;
+        }
+
+        // Validación del formulario
+        function validateForm() {
+            let isValid = true;
+            
+            const employeeName = document.getElementById('employeeName').value.trim();
+            const nameError = document.getElementById('nameError');
+            
+            if (employeeName === '') {
+                nameError.style.display = 'block';
+                isValid = false;
+            } else {
+                nameError.style.display = 'none';
+            }
+            
+            const sucursal = document.getElementById('sucursal').value;
+            const sucursalError = document.getElementById('sucursalError');
+            
+            if (sucursal === '') {
+                sucursalError.style.display = 'block';
+                isValid = false;
+            } else {
+                sucursalError.style.display = 'none';
+            }
+            
+            const rating = document.querySelector('input[name="rating"]:checked');
+            const ratingError = document.getElementById('ratingError');
+            
+            if (!rating) {
+                ratingError.style.display = 'block';
+                isValid = false;
+            } else {
+                ratingError.style.display = 'none';
+            }
+            
+            return isValid;
+        }
+
+        // Manejo del envío del formulario
+        document.getElementById('ratingForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            if (!canSubmitReview()) {
+                showCooldownMessage();
+                return;
+            }
+            
+            if (!validateForm()) {
+                return;
+            }
+            
+            const submitBtn = document.querySelector('.submit-btn');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
+            submitBtn.disabled = true;
+            
+            const formData = new FormData();
+            formData.append('employeeName', document.getElementById('employeeName').value);
+            formData.append('sucursal', document.getElementById('sucursal').value);
+            formData.append('rating', document.querySelector('input[name="rating"]:checked').value);
+            formData.append('suggestions', document.getElementById('suggestions').value);
+            formData.append('customerEmail', document.getElementById('customerEmail').value);
+            formData.append('notifications', document.getElementById('notifications').checked ? 'Si' : 'No');
+            
+            function showSocialSection() {
+                localStorage.setItem('lastReviewSubmission', new Date().getTime().toString());
+                document.getElementById('ratingForm').style.display = 'none';
+                document.getElementById('thankYouSection').style.display = 'block';
+            }
+            
+            const timeoutPromise = new Promise((_, reject) => 
+                setTimeout(() => reject(new Error('Timeout')), 8000)
+            );
+            
+            const fetchPromise = fetch(GOOGLE_SCRIPT_URL, {
+                method: 'POST',
+                body: formData,
+                mode: 'no-cors'
+            }).then(response => {
+                return {status: 'success'};
+            });
+            
+            Promise.race([fetchPromise, timeoutPromise])
+                .then(data => {
+                    showSocialSection();
+                })
+                .catch(error => {
+                    showSocialSection();
+                })
+                .finally(() => {
+                    setTimeout(() => {
+                        submitBtn.innerHTML = originalText;
+                        submitBtn.disabled = false;
+                    }, 1000);
+                });
+        });
+
+        // Función para copiar número al portapapeles
+        function copyToClipboard(phoneNumber) {
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(phoneNumber).then(function() {
+                    showCopyNotification(phoneNumber);
+                }).catch(function(err) {
+                    fallbackCopyTextToClipboard(phoneNumber);
+                });
+            } else {
+                fallbackCopyTextToClipboard(phoneNumber);
+            }
+        }
+
+        function fallbackCopyTextToClipboard(text) {
+            const textArea = document.createElement("textarea");
+            textArea.value = text;
+            textArea.style.position = "fixed";
+            textArea.style.left = "-999999px";
+            textArea.style.top = "-999999px";
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            
+            try {
+                const successful = document.execCommand('copy');
+                if (successful) {
+                    showCopyNotification(text);
+                }
+            } catch (err) {
+                console.error('Error al copiar', err);
+            }
+            
+            document.body.removeChild(textArea);
+        }
+
+        function showCopyNotification(phoneNumber) {
+            const notification = document.getElementById('copyNotification');
+            const notificationText = document.getElementById('notificationText');
+            
+            notificationText.textContent = `Número ${phoneNumber} copiado al portapapeles`;
+            
+            notification.classList.remove('hide');
+            notification.classList.add('show');
+            
+            setTimeout(function() {
+                notification.classList.remove('show');
+                notification.classList.add('hide');
+                
+                setTimeout(function() {
+                    notification.classList.remove('hide');
+                }, 300);
+            }, 3000);
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            showCooldownMessage();
+            
+            document.getElementById('suggestions').addEventListener('input', function() {
+                this.style.height = 'auto';
+                this.style.height = this.scrollHeight + 'px';
+            });
+        });
+    </script>
+</body>
+</html>

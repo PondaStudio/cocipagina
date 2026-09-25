@@ -5,11 +5,13 @@ Este repo se despliega automáticamente a Hostinger (dominio `cocimashogargdl.co
 
 ## Estado actual → objetivo
 
-El sitio hoy es PHP/HTML estático simple (`default.php`, `index.html`) sin build. Se va a migrar a:
+El sitio ya se migró a:
 
 - **React 18 + Vite + Tailwind CSS**
-- **React Router DOM** para navegación por secciones (SPA de una sola página con pestañas, NO tienda en línea)
+- **React Router DOM v7** (modo declarativo, `BrowserRouter`) para navegación por secciones (SPA de una sola página con pestañas, NO tienda en línea)
 - Mobile-first, responsive para PC y celular
+
+Estructura: `src/pages/*.jsx` (una página por sección), `src/components/` (Layout, Header, BottomNav, Footer), `src/config/` (`sucursales.js`, `vacantes.js` — datos editables sin tocar lógica). El HTML/PHP legacy previo a la migración vive en `legacy/` solo como referencia histórica, no se despliega.
 
 No reintroducir PHP. No usar frameworks distintos a los aquí listados sin confirmarlo con el usuario primero.
 
@@ -26,7 +28,9 @@ Sucursales existentes (mismos códigos que en el ERP interno CocimasApp): JM437,
 
 ## Datos: Google Sheets, no base de datos
 
-La encuesta de satisfacción escribe directo a un Google Sheet (no Supabase, no MySQL). La API key ya existe como GitHub Secret: `GOOGLE_SHEETS_API_KEY`. Referénciala en el workflow/build (`${{ secrets.GOOGLE_SHEETS_API_KEY }}` o como env var inyectada en build) — **nunca la hardcodees en el código ni la commitees**.
+La encuesta de satisfacción escribe directo a un Google Sheet (no Supabase, no MySQL), vía un **Google Apps Script Web App** (`script.google.com/.../exec`), igual que el sitio legacy — el script corre con su propia autorización de servidor, así que el navegador nunca ve ninguna credencial. La URL vive en `src/pages/Encuesta.jsx` como constante `GOOGLE_SCRIPT_URL` (hoy placeholder, el dueño debe reemplazarla con la URL real de su Apps Script).
+
+`GOOGLE_SHEETS_API_KEY` (GitHub Secret) no se usa: una API key simple de Google Sheets solo permite **lectura** de hojas públicas, no escritura — no sirve para este flujo. Si en el futuro se requiere leer datos desde el cliente con esa key, evaluar de nuevo si conviene exponerla (aunque sea restringida) o pasar por el mismo Apps Script.
 
 ## Despliegue (GitHub Actions → FTP Hostinger)
 
