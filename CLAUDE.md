@@ -28,7 +28,7 @@ Sucursales existentes (mismos códigos que en el ERP interno CocimasApp): JM437,
 
 ## Datos: Google Sheets, no base de datos
 
-La encuesta de satisfacción escribe directo a un Google Sheet (no Supabase, no MySQL), vía un **Google Apps Script Web App** (`script.google.com/.../exec`), igual que el sitio legacy — el script corre con su propia autorización de servidor, así que el navegador nunca ve ninguna credencial. La URL vive en `src/pages/Encuesta.jsx` como constante `GOOGLE_SCRIPT_URL` (hoy placeholder, el dueño debe reemplazarla con la URL real de su Apps Script).
+La encuesta de satisfacción escribe directo a un Google Sheet (no Supabase, no MySQL), vía un **Google Apps Script Web App** (`script.google.com/.../exec`), igual que el sitio legacy — el script corre con su propia autorización de servidor, así que el navegador nunca ve ninguna credencial. La URL ya está configurada en `src/components/EncuestaForm.jsx` como constante `GOOGLE_SCRIPT_URL` (mismo Apps Script que usaba el sitio legacy).
 
 `GOOGLE_SHEETS_API_KEY` (GitHub Secret) no se usa: una API key simple de Google Sheets solo permite **lectura** de hojas públicas, no escritura — no sirve para este flujo. Si en el futuro se requiere leer datos desde el cliente con esa key, evaluar de nuevo si conviene exponerla (aunque sea restringida) o pasar por el mismo Apps Script.
 
