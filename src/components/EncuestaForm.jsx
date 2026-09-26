@@ -146,7 +146,11 @@ export default function EncuestaForm({
         payload.append('ticketFotoTipo', ticketFoto.type || 'image/jpeg')
       }
 
-      const timeout = new Promise((_, reject) => setTimeout(() => reject(new Error('timeout')), 15000))
+      // Generoso a propósito: con foto adjunta (base64) la subida puede
+      // tardar en redes lentas, y si el timeout salta antes de que el
+      // request termine, la petición sigue viva y puede llegar al Sheet
+      // igual — pero al usuario le aparecería un error falso.
+      const timeout = new Promise((_, reject) => setTimeout(() => reject(new Error('timeout')), 45000))
       const request = fetch(GOOGLE_SCRIPT_URL, {
         method: 'POST',
         body: payload,
@@ -353,8 +357,14 @@ export default function EncuestaForm({
         <button
           type="submit"
           disabled={status === STATUS.SENDING}
-          className="w-full rounded-xl bg-brand-blue text-white font-semibold py-3.5 shadow-md shadow-brand-blue/20 hover:bg-sky-600 hover:shadow-lg hover:shadow-brand-blue/30 active:scale-[0.99] transition-all disabled:opacity-60 disabled:pointer-events-none disabled:shadow-none"
+          className="w-full inline-flex items-center justify-center gap-2.5 rounded-xl bg-brand-blue text-white font-semibold py-3.5 shadow-md shadow-brand-blue/20 hover:bg-sky-600 hover:shadow-lg hover:shadow-brand-blue/30 active:scale-[0.99] transition-all disabled:opacity-60 disabled:pointer-events-none disabled:shadow-none"
         >
+          {status === STATUS.SENDING && (
+            <span
+              aria-hidden="true"
+              className="h-4 w-4 rounded-full border-2 border-white/40 border-t-white animate-spin"
+            />
+          )}
           {status === STATUS.SENDING ? 'Enviando...' : 'Enviar calificación'}
         </button>
       </form>
