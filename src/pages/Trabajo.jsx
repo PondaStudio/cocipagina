@@ -15,8 +15,8 @@ export default function Trabajo() {
       <div className="relative overflow-hidden bg-gradient-to-br from-brand-dark to-slate-800 text-white">
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 opacity-[0.06] bg-repeat bg-[length:260px_132px]"
-          style={{ backgroundImage: "url('/patterns/patron-muebles-blanco-azul.jpg')" }}
+          className="pointer-events-none absolute inset-0 opacity-[0.14] bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: "url('/patterns/columna-blanco-azul.jpg')" }}
         />
         <div className="relative mx-auto max-w-3xl px-4 py-10">
           <h1 className="text-2xl font-bold">Bolsa de trabajo</h1>

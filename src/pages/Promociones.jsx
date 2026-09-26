@@ -50,8 +50,8 @@ export default function Promociones() {
       <div className="relative overflow-hidden bg-gradient-to-br from-sky-500 to-brand-blue text-white">
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 opacity-[0.08] bg-repeat bg-[length:260px_132px]"
-          style={{ backgroundImage: "url('/patterns/patron-electrodomesticos-blanco-azul.jpg')" }}
+          className="pointer-events-none absolute inset-0 opacity-[0.16] bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: "url('/patterns/columna-blanco-azul.jpg')" }}
         />
         <div className="relative mx-auto max-w-5xl px-4 py-10">
           <h1 className="text-2xl font-bold">Promociones</h1>
