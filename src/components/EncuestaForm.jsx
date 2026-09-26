@@ -54,6 +54,15 @@ export default function EncuestaForm({
     setTicketFoto(file)
   }
 
+  function fileToBase64(file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader()
+      reader.onload = () => resolve(String(reader.result).split(',')[1] ?? '')
+      reader.onerror = reject
+      reader.readAsDataURL(file)
+    })
+  }
+
   async function handleSubmit(e) {
     e.preventDefault()
     if (!validate()) return
@@ -61,7 +70,9 @@ export default function EncuestaForm({
     setStatus(STATUS.SENDING)
 
     // Nombres de campo iguales a los que ya espera el Google Apps Script
-    // Web App existente (el mismo que usaba el sitio legacy).
+    // Web App existente (el mismo que usaba el sitio legacy). Apps Script
+    // no soporta archivos binarios vía multipart/FormData, así que la foto
+    // se manda como texto en base64.
     const payload = new FormData()
     payload.append('sucursal', sucursal?.nombre ?? sucursalCodigo)
     payload.append('sucursalCodigo', sucursalCodigo)
@@ -69,12 +80,16 @@ export default function EncuestaForm({
     payload.append('rating', calificacion)
     payload.append('suggestions', sugerencias)
     payload.append('fecha', new Date().toISOString())
-    if (ticketFoto) {
-      payload.append('ticketFoto', ticketFoto, ticketFoto.name)
-    }
 
     try {
-      const timeout = new Promise((_, reject) => setTimeout(() => reject(new Error('timeout')), 8000))
+      if (ticketFoto) {
+        const base64 = await fileToBase64(ticketFoto)
+        payload.append('ticketFotoBase64', base64)
+        payload.append('ticketFotoNombre', ticketFoto.name)
+        payload.append('ticketFotoTipo', ticketFoto.type || 'image/jpeg')
+      }
+
+      const timeout = new Promise((_, reject) => setTimeout(() => reject(new Error('timeout')), 15000))
       const request = fetch(GOOGLE_SCRIPT_URL, {
         method: 'POST',
         body: payload,
