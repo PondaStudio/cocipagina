@@ -46,12 +46,23 @@ export default function Promociones() {
   const pasadas = PROMOCIONES.filter((p) => esPasadaVisible(p))
 
   return (
-    <div className="mx-auto max-w-5xl px-4 py-10">
-      <h1 className="text-2xl font-bold text-brand-dark">Promociones</h1>
-      <p className="text-slate-500 mt-1 mb-8">
-        Descuentos y ofertas vigentes en nuestras sucursales. Da clic en una promoción para ver
-        el detalle completo.
-      </p>
+    <div>
+      <div className="relative overflow-hidden bg-gradient-to-br from-sky-500 to-brand-blue text-white">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 opacity-[0.08] bg-repeat bg-[length:260px_132px]"
+          style={{ backgroundImage: "url('/patterns/patron-electrodomesticos-blanco-azul.jpg')" }}
+        />
+        <div className="relative mx-auto max-w-5xl px-4 py-10">
+          <h1 className="text-2xl font-bold">Promociones</h1>
+          <p className="text-sky-50 mt-1">
+            Descuentos y ofertas vigentes en nuestras sucursales. Da clic en una promoción para
+            ver el detalle completo.
+          </p>
+        </div>
+      </div>
+
+      <div className="mx-auto max-w-5xl px-4 py-10">
 
       {activas.length > 0 ? (
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
@@ -73,6 +84,7 @@ export default function Promociones() {
           </div>
         </div>
       )}
+      </div>
     </div>
   )
 }

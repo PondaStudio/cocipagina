@@ -12,6 +12,11 @@ export default function Inicio() {
       <section className="relative overflow-hidden bg-gradient-to-br from-sky-500 via-brand-blue to-blue-700 text-white">
         <div
           aria-hidden="true"
+          className="pointer-events-none absolute inset-0 opacity-[0.07] bg-repeat bg-[length:280px_142px]"
+          style={{ backgroundImage: "url('/patterns/patron-electrodomesticos-blanco-azul.jpg')" }}
+        />
+        <div
+          aria-hidden="true"
           className="pointer-events-none absolute -top-24 -left-20 h-72 w-72 rounded-full bg-brand-yellow/20 blur-3xl"
         />
         <div
@@ -66,8 +71,13 @@ export default function Inicio() {
       </section>
 
       {promosActivas.length > 0 && (
-        <section id="promociones" className="bg-white border-t border-slate-200">
-          <div className="mx-auto w-full max-w-5xl px-4 py-14 sm:py-16">
+        <section id="promociones" className="relative overflow-hidden bg-white border-t border-slate-200">
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0 opacity-[0.04] bg-repeat bg-[length:280px_142px]"
+            style={{ backgroundImage: "url('/patterns/patron-electrodomesticos-azul-blanco.jpg')" }}
+          />
+          <div className="relative mx-auto w-full max-w-5xl px-4 py-14 sm:py-16">
             <div className="flex items-baseline justify-between mb-6">
               <h2 className="text-2xl font-bold text-brand-dark">Promociones</h2>
               <Link to="/promociones" className="text-sm font-semibold text-brand-blue hover:underline">

@@ -2,8 +2,13 @@ import { REDES_SOCIALES } from '../config/sucursales.js'
 
 export default function Footer() {
   return (
-    <footer className="border-t border-slate-200 bg-white mt-12">
-      <div className="mx-auto max-w-5xl px-4 py-8 text-center text-sm text-slate-500 space-y-3">
+    <footer className="relative overflow-hidden border-t border-slate-200 bg-white mt-12">
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 opacity-[0.05] bg-repeat bg-[length:260px_132px]"
+        style={{ backgroundImage: "url('/patterns/patron-vajilla-azul-blanco.jpg')" }}
+      />
+      <div className="relative mx-auto max-w-5xl px-4 py-8 text-center text-sm text-slate-500 space-y-3">
         <div className="flex justify-center gap-4">
           <a
             href={REDES_SOCIALES.facebook}

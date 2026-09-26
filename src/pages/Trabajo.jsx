@@ -11,11 +11,22 @@ function contactoLink(contacto, vacante) {
 
 export default function Trabajo() {
   return (
-    <div className="mx-auto max-w-3xl px-4 py-10">
-      <h1 className="text-2xl font-bold text-brand-dark">Bolsa de trabajo</h1>
-      <p className="text-slate-500 mt-1 mb-8">
-        Vacantes activas en Cocimas Hogar. Contáctanos directamente para aplicar.
-      </p>
+    <div>
+      <div className="relative overflow-hidden bg-gradient-to-br from-brand-dark to-slate-800 text-white">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 opacity-[0.06] bg-repeat bg-[length:260px_132px]"
+          style={{ backgroundImage: "url('/patterns/patron-muebles-blanco-azul.jpg')" }}
+        />
+        <div className="relative mx-auto max-w-3xl px-4 py-10">
+          <h1 className="text-2xl font-bold">Bolsa de trabajo</h1>
+          <p className="text-slate-300 mt-1">
+            Vacantes activas en Cocimas Hogar. Contáctanos directamente para aplicar.
+          </p>
+        </div>
+      </div>
+
+      <div className="mx-auto max-w-3xl px-4 py-10">
 
       <div className="space-y-4">
         {VACANTES.map((v, i) => (
@@ -57,6 +68,7 @@ export default function Trabajo() {
       <p className="text-xs text-slate-400 mt-8">
         Vacantes de ejemplo — actualízalas en src/config/vacantes.js.
       </p>
+      </div>
     </div>
   )
 }
