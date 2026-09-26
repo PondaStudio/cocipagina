@@ -27,6 +27,7 @@ export default function EncuestaForm({
   const [vendedora, setVendedora] = useState('')
   const [calificacion, setCalificacion] = useState('')
   const [sugerencias, setSugerencias] = useState('')
+  const [ticketFoto, setTicketFoto] = useState(null)
   const [status, setStatus] = useState(STATUS.IDLE)
   const [errors, setErrors] = useState({})
 
@@ -35,12 +36,22 @@ export default function EncuestaForm({
     [sucursalCodigo],
   )
 
+  const MAX_FOTO_MB = 8
+
   function validate() {
     const next = {}
     if (!sucursalCodigo) next.sucursal = 'Selecciona una sucursal.'
     if (!calificacion) next.calificacion = 'Selecciona una calificación.'
+    if (ticketFoto && ticketFoto.size > MAX_FOTO_MB * 1024 * 1024) {
+      next.ticketFoto = `La foto pesa demasiado (máx. ${MAX_FOTO_MB} MB).`
+    }
     setErrors(next)
     return Object.keys(next).length === 0
+  }
+
+  function handleFotoChange(e) {
+    const file = e.target.files?.[0] ?? null
+    setTicketFoto(file)
   }
 
   async function handleSubmit(e) {
@@ -58,6 +69,9 @@ export default function EncuestaForm({
     payload.append('rating', calificacion)
     payload.append('suggestions', sugerencias)
     payload.append('fecha', new Date().toISOString())
+    if (ticketFoto) {
+      payload.append('ticketFoto', ticketFoto, ticketFoto.name)
+    }
 
     try {
       const timeout = new Promise((_, reject) => setTimeout(() => reject(new Error('timeout')), 8000))
@@ -195,6 +209,32 @@ export default function EncuestaForm({
             placeholder="Comparte tus comentarios..."
             className="w-full rounded-xl border border-slate-300 px-4 py-3 text-base focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/30 outline-none transition-shadow resize-none"
           />
+        </div>
+
+        <div>
+          <label htmlFor="ticketFoto" className="block text-sm font-semibold text-slate-700 mb-1.5">
+            Foto del ticket <span className="font-normal text-slate-400">(opcional)</span>
+          </label>
+          <label
+            htmlFor="ticketFoto"
+            className="flex items-center gap-3 rounded-xl border-2 border-dashed border-slate-300 px-4 py-3 cursor-pointer hover:border-brand-blue transition-colors"
+          >
+            <span className="text-2xl">📷</span>
+            <span className="text-sm text-slate-500 truncate">
+              {ticketFoto ? ticketFoto.name : 'Toca para tomar o subir una foto'}
+            </span>
+          </label>
+          <input
+            type="file"
+            id="ticketFoto"
+            accept="image/*"
+            capture="environment"
+            onChange={handleFotoChange}
+            className="hidden"
+          />
+          {errors.ticketFoto && (
+            <p className="text-sm text-brand-red mt-1">{errors.ticketFoto}</p>
+          )}
         </div>
 
         {status === STATUS.ERROR && (
