@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { SUCURSALES, GOOGLE_REVIEW_DEFAULT_URL, REDES_SOCIALES } from '../config/sucursales.js'
 
 // El Web App corre con la autorización del propio script, así que no expone
@@ -19,6 +19,22 @@ const STATUS = {
   ERROR: 'error',
 }
 
+const COOLDOWN_MS = 60 * 1000
+
+function getDeviceId() {
+  try {
+    const key = 'cocimas_device_id'
+    let id = localStorage.getItem(key)
+    if (!id) {
+      id = crypto.randomUUID ? crypto.randomUUID() : `${Date.now()}-${Math.random().toString(36).slice(2)}`
+      localStorage.setItem(key, id)
+    }
+    return id
+  } catch {
+    return ''
+  }
+}
+
 export default function EncuestaForm({
   title = '¡Tu opinión nos importa!',
   className = 'mx-auto max-w-md px-4',
@@ -28,8 +44,18 @@ export default function EncuestaForm({
   const [calificacion, setCalificacion] = useState('')
   const [sugerencias, setSugerencias] = useState('')
   const [ticketFoto, setTicketFoto] = useState(null)
+  const [email, setEmail] = useState('')
+  const [quierePublicidad, setQuierePublicidad] = useState(false)
   const [status, setStatus] = useState(STATUS.IDLE)
   const [errors, setErrors] = useState({})
+  const [ip, setIp] = useState('')
+
+  useEffect(() => {
+    fetch('https://api.ipify.org?format=json')
+      .then((r) => r.json())
+      .then((data) => setIp(data.ip || ''))
+      .catch(() => {})
+  }, [])
 
   const sucursal = useMemo(
     () => SUCURSALES.find((s) => s.codigo === sucursalCodigo),
@@ -37,6 +63,7 @@ export default function EncuestaForm({
   )
 
   const MAX_FOTO_MB = 8
+  const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
   function validate() {
     const next = {}
@@ -45,8 +72,29 @@ export default function EncuestaForm({
     if (ticketFoto && ticketFoto.size > MAX_FOTO_MB * 1024 * 1024) {
       next.ticketFoto = `La foto pesa demasiado (máx. ${MAX_FOTO_MB} MB).`
     }
+    if (email && !EMAIL_REGEX.test(email)) {
+      next.email = 'Ese correo no se ve válido.'
+    }
     setErrors(next)
     return Object.keys(next).length === 0
+  }
+
+  function puedeEnviar() {
+    try {
+      const ultimo = localStorage.getItem('cocimas_last_submit')
+      if (!ultimo) return true
+      return Date.now() - Number(ultimo) > COOLDOWN_MS
+    } catch {
+      return true
+    }
+  }
+
+  function marcarEnviado() {
+    try {
+      localStorage.setItem('cocimas_last_submit', String(Date.now()))
+    } catch {
+      // localStorage no disponible, no bloqueamos el envío por esto
+    }
   }
 
   function handleFotoChange(e) {
@@ -67,6 +115,11 @@ export default function EncuestaForm({
     e.preventDefault()
     if (!validate()) return
 
+    if (!puedeEnviar()) {
+      setErrors({ cooldown: 'Ya enviaste una calificación hace poco. Espera un minuto e intenta de nuevo.' })
+      return
+    }
+
     setStatus(STATUS.SENDING)
 
     // Nombres de campo iguales a los que ya espera el Google Apps Script
@@ -79,6 +132,10 @@ export default function EncuestaForm({
     payload.append('employeeName', vendedora)
     payload.append('rating', calificacion)
     payload.append('suggestions', sugerencias)
+    payload.append('customerEmail', email)
+    payload.append('notifications', quierePublicidad ? 'Si' : 'No')
+    payload.append('ipAddress', ip)
+    payload.append('deviceId', getDeviceId())
     payload.append('fecha', new Date().toISOString())
 
     try {
@@ -96,6 +153,7 @@ export default function EncuestaForm({
         mode: 'no-cors',
       })
       await Promise.race([request, timeout])
+      marcarEnviado()
       setStatus(STATUS.SUCCESS)
     } catch (err) {
       setStatus(STATUS.ERROR)
@@ -251,6 +309,39 @@ export default function EncuestaForm({
             <p className="text-sm text-brand-red mt-1">{errors.ticketFoto}</p>
           )}
         </div>
+
+        <div>
+          <label htmlFor="email" className="block text-sm font-semibold text-slate-700 mb-1.5">
+            Tu correo <span className="font-normal text-slate-400">(opcional)</span>
+          </label>
+          <input
+            type="email"
+            id="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="ejemplo@correo.com"
+            className="w-full rounded-xl border border-slate-300 px-4 py-3 text-base focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/30 outline-none transition-shadow"
+          />
+          {errors.email && <p className="text-sm text-brand-red mt-1">{errors.email}</p>}
+
+          <label className="flex items-start gap-2.5 mt-3 cursor-pointer">
+            <input
+              type="checkbox"
+              checked={quierePublicidad}
+              onChange={(e) => setQuierePublicidad(e.target.checked)}
+              className="mt-0.5 h-4 w-4 rounded border-slate-300 text-brand-blue focus:ring-brand-blue/30"
+            />
+            <span className="text-sm text-slate-600">
+              Quiero recibir promociones y novedades de Cocimas Hogar por correo.
+            </span>
+          </label>
+        </div>
+
+        {errors.cooldown && (
+          <div className="rounded-xl bg-yellow-50 border border-brand-yellow/40 px-4 py-3 text-sm text-yellow-800">
+            {errors.cooldown}
+          </div>
+        )}
 
         {status === STATUS.ERROR && (
           <div className="rounded-xl bg-red-50 border border-red-200 px-4 py-3 text-sm text-brand-red">
