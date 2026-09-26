@@ -34,11 +34,19 @@ export default function PromocionDetalle() {
       </Link>
 
       <div className="mt-4 rounded-2xl overflow-hidden border border-slate-200 shadow-sm bg-white">
-        <div className="aspect-[4/3] sm:aspect-[16/9] bg-slate-100 relative">
+        <div className="aspect-[4/3] sm:aspect-[16/9] bg-slate-900 relative overflow-hidden">
+          <img
+            src={promo.imagen}
+            aria-hidden="true"
+            alt=""
+            className={`absolute inset-0 h-full w-full object-cover scale-110 blur-xl opacity-50 ${
+              vigente ? '' : 'grayscale'
+            }`}
+          />
           <img
             src={promo.imagen}
             alt={promo.titulo}
-            className={`h-full w-full object-cover ${vigente ? '' : 'grayscale opacity-70'}`}
+            className={`relative h-full w-full object-contain ${vigente ? '' : 'grayscale opacity-70'}`}
           />
           {!vigente && (
             <span className="absolute top-3 right-3 rounded-full bg-slate-800/80 text-white text-xs font-semibold px-3 py-1">

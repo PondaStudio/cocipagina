@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { PROMOCIONES, estaVigente } from '../config/promociones.js'
+import { PROMOCIONES, estaVigente, esPasadaVisible } from '../config/promociones.js'
 
 function PromoCard({ promo, agotada = false }) {
   return (
@@ -7,12 +7,20 @@ function PromoCard({ promo, agotada = false }) {
       to={`/promociones/${promo.id}`}
       className="group block overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all"
     >
-      <div className="aspect-[4/3] overflow-hidden bg-slate-100 relative">
+      <div className="aspect-square overflow-hidden bg-slate-100 relative">
+        <img
+          src={promo.imagen}
+          aria-hidden="true"
+          alt=""
+          className={`absolute inset-0 h-full w-full object-cover scale-110 blur-xl opacity-60 ${
+            agotada ? 'grayscale' : ''
+          }`}
+        />
         <img
           src={promo.imagen}
           alt={promo.titulo}
           loading="lazy"
-          className={`h-full w-full object-cover transition-transform group-hover:scale-105 ${
+          className={`relative h-full w-full object-contain transition-transform group-hover:scale-[1.02] ${
             agotada ? 'grayscale opacity-70' : ''
           }`}
         />
@@ -35,7 +43,7 @@ function PromoCard({ promo, agotada = false }) {
 
 export default function Promociones() {
   const activas = PROMOCIONES.filter((p) => estaVigente(p))
-  const pasadas = PROMOCIONES.filter((p) => !estaVigente(p))
+  const pasadas = PROMOCIONES.filter((p) => esPasadaVisible(p))
 
   return (
     <div className="mx-auto max-w-5xl px-4 py-10">

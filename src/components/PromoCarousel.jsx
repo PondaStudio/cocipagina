@@ -26,15 +26,21 @@ export default function PromoCarousel({ promos }) {
             <Link
               key={promo.id}
               to={`/promociones/${promo.id}`}
-              className="w-full shrink-0 relative aspect-[4/3] sm:aspect-[16/9]"
+              className="w-full shrink-0 relative aspect-[4/3] sm:aspect-[16/9] bg-slate-900 overflow-hidden"
             >
+              <img
+                src={promo.imagen}
+                aria-hidden="true"
+                alt=""
+                className="absolute inset-0 h-full w-full object-cover scale-110 blur-xl opacity-50"
+              />
               <img
                 src={promo.imagen}
                 alt={promo.titulo}
                 loading="lazy"
-                className="h-full w-full object-cover"
+                className="relative h-full w-full object-contain"
               />
-              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent p-4 sm:p-6">
+              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent p-4 sm:p-6">
                 <span className="inline-block rounded-full bg-brand-yellow text-brand-dark text-xs font-bold px-2.5 py-1 mb-1.5">
                   {promo.descuento}
                 </span>
