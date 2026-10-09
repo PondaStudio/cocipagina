@@ -12,7 +12,7 @@ del componente — eso no requiere Apps Script, solo falta que la persona toque
 1. Crea una hoja de cálculo nueva en Google Sheets (o usa una existente).
 2. En la primera hoja, agrega estos encabezados en la fila 1:
 
-   `Fecha | Nombre | Teléfono | Puesto | Sucursal | Experiencia | CV`
+   `Fecha | Nombre | Teléfono | Puesto | Experiencia | CV`
 
 ## 2. Crea el Apps Script
 
@@ -42,7 +42,6 @@ function doPost(e) {
     p.nombre || '',
     p.telefono || '',
     p.puesto || '',
-    p.sucursal || '',
     p.experiencia || '',
     cvLink,
   ]);

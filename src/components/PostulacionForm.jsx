@@ -75,7 +75,6 @@ export default function PostulacionForm() {
       payload.append('nombre', nombre)
       payload.append('telefono', telefono)
       payload.append('puesto', vacante.puesto)
-      payload.append('sucursal', vacante.sucursal)
       payload.append('experiencia', experiencia)
       payload.append('fecha', new Date().toISOString())
 
@@ -103,7 +102,7 @@ export default function PostulacionForm() {
     const mensajeWhatsapp = [
       'Nueva postulación desde el sitio:',
       `Nombre: ${nombre}`,
-      `Puesto: ${vacante.puesto} (${vacante.sucursal})`,
+      `Puesto: ${vacante.puesto}`,
       `Teléfono: ${telefono}`,
       experiencia ? `Experiencia: ${experiencia}` : null,
       cv ? `Adjuntó CV: ${cv.name} (revisa la hoja de Google para descargarlo)` : null,
@@ -164,7 +163,7 @@ export default function PostulacionForm() {
             <option value="">Selecciona un puesto...</option>
             {VACANTES.map((v, i) => (
               <option key={i} value={i}>
-                {v.puesto} — {v.sucursal}
+                {v.puesto}
               </option>
             ))}
           </select>
