@@ -7,6 +7,20 @@ function waLink(numero, mensaje) {
   return `https://wa.me/${clean}?text=${text}`
 }
 
+function mapsLink(direccion) {
+  return `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(direccion)}`
+}
+
+function ContactCard({ icon, label, children }) {
+  return (
+    <div className="aspect-square rounded-2xl border border-slate-200 bg-white shadow-sm hover:shadow-md transition-shadow p-4 flex flex-col items-center justify-center text-center gap-1.5">
+      <span className="text-2xl">{icon}</span>
+      <span className="font-bold text-brand-dark text-sm">{label}</span>
+      {children}
+    </div>
+  )
+}
+
 export default function Contacto() {
   const [copiado, setCopiado] = useState('')
 
@@ -24,79 +38,65 @@ export default function Contacto() {
     <div className="mx-auto max-w-3xl px-4 py-10">
       <h1 className="text-2xl font-bold text-brand-dark">Contacto</h1>
       <p className="text-slate-500 mt-1 mb-8">
-        Escríbenos directo por WhatsApp a la vendedora de tu sucursal, o contáctanos para
-        ventas, facturación o recursos humanos.
+        Escríbenos por WhatsApp para ventas, o contáctanos para facturación y recursos humanos.
       </p>
 
-      <section className="rounded-2xl bg-white border border-slate-200 shadow-sm hover:shadow-md transition-shadow px-5 py-5 mb-8">
-        <h2 className="font-bold text-brand-dark mb-3">Ventas</h2>
-        <div className="flex flex-wrap gap-2">
-          {VENTAS_TELEFONOS.map((tel) => (
-            <a
-              key={tel}
-              href={waLink(tel, 'Hola, te escribo desde la página de Cocimas Hogar.')}
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center gap-1.5 rounded-full bg-green-50 text-green-700 border border-green-200 px-3.5 py-1.5 text-sm font-medium hover:bg-green-100 hover:shadow-sm transition-all"
-            >
-              💬 {tel}
-            </a>
-          ))}
-        </div>
-      </section>
+      <div className="grid grid-cols-3 gap-3 mb-10">
+        <ContactCard icon="💬" label="Ventas">
+          <div className="flex flex-col gap-1 mt-1">
+            {VENTAS_TELEFONOS.map((tel) => (
+              <a
+                key={tel}
+                href={waLink(tel, 'Hola, te escribo desde la página de Cocimas Hogar.')}
+                target="_blank"
+                rel="noreferrer"
+                className="text-xs font-mono text-green-700 hover:underline"
+              >
+                {tel}
+              </a>
+            ))}
+          </div>
+        </ContactCard>
 
-      <section className="rounded-2xl bg-white border border-slate-200 shadow-sm hover:shadow-md transition-shadow px-5 py-5 mb-8">
-        <h2 className="font-bold text-brand-dark mb-3">Facturación</h2>
-        <div className="flex flex-wrap gap-3">
+        <ContactCard icon="🧾" label="Facturación">
           <button
             onClick={() => copiar(FACTURACION_TELEFONO)}
-            className="flex items-center gap-2 rounded-full border border-slate-200 px-4 py-2.5 font-mono text-sm text-slate-700 hover:border-brand-blue hover:text-brand-blue hover:shadow-sm transition-all"
+            className="text-xs font-mono text-slate-600 hover:text-brand-blue mt-1"
           >
-            📞 {FACTURACION_TELEFONO}
-            {copiado === FACTURACION_TELEFONO && <span className="text-xs text-green-600">¡Copiado!</span>}
+            {copiado === FACTURACION_TELEFONO ? '¡Copiado!' : FACTURACION_TELEFONO}
           </button>
-        </div>
-      </section>
+        </ContactCard>
 
-      <section className="rounded-2xl bg-white border border-slate-200 shadow-sm hover:shadow-md transition-shadow px-5 py-5 mb-8">
-        <h2 className="font-bold text-brand-dark mb-3">Recursos Humanos</h2>
-        <div className="flex flex-wrap gap-3">
+        <ContactCard icon="🧑‍💼" label="Recursos Humanos">
           <button
             onClick={() => copiar(RH_TELEFONO)}
-            className="flex items-center gap-2 rounded-full border border-slate-200 px-4 py-2.5 font-mono text-sm text-slate-700 hover:border-brand-blue hover:text-brand-blue hover:shadow-sm transition-all"
+            className="text-xs font-mono text-slate-600 hover:text-brand-blue mt-1"
           >
-            📞 {RH_TELEFONO}
-            {copiado === RH_TELEFONO && <span className="text-xs text-green-600">¡Copiado!</span>}
+            {copiado === RH_TELEFONO ? '¡Copiado!' : RH_TELEFONO}
           </button>
-        </div>
-      </section>
+        </ContactCard>
+      </div>
 
-      <section className="space-y-4">
+      <h2 className="font-bold text-brand-dark mb-3">Nuestras sucursales</h2>
+      <section className="space-y-3">
         {SUCURSALES.map((s) => (
           <div
             key={s.codigo}
-            className="rounded-2xl border border-slate-200 bg-white shadow-sm hover:shadow-md transition-shadow px-5 py-5"
+            className="rounded-2xl border border-slate-200 bg-white shadow-sm hover:shadow-md transition-shadow px-5 py-4 flex items-center justify-between gap-4"
           >
-            <div className="flex items-baseline justify-between gap-2 flex-wrap">
-              <h2 className="font-bold text-brand-dark">{s.nombre}</h2>
-              <span className="text-xs font-mono text-slate-400">{s.codigo}</span>
+            <div>
+              <h3 className="font-bold text-brand-dark">{s.nombre}</h3>
+              <p className="text-sm text-slate-500 mt-0.5">{s.direccion}</p>
+              <p className="text-sm text-slate-500">{s.horario}</p>
             </div>
-            <p className="text-sm text-slate-500 mt-1">{s.direccion}</p>
-            <p className="text-sm text-slate-500">{s.horario}</p>
-
-            <div className="mt-3 flex flex-wrap gap-2">
-              {s.vendedoras.map((v) => (
-                <a
-                  key={v.nombre}
-                  href={waLink(v.whatsapp, `Hola, te escribo desde la página de Cocimas Hogar (${s.nombre}).`)}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center gap-1.5 rounded-full bg-green-50 text-green-700 border border-green-200 px-3.5 py-1.5 text-sm font-medium hover:bg-green-100 hover:shadow-sm transition-all"
-                >
-                  💬 {v.nombre}
-                </a>
-              ))}
-            </div>
+            <a
+              href={mapsLink(s.direccion)}
+              target="_blank"
+              rel="noreferrer"
+              className="shrink-0 inline-flex items-center gap-1.5 rounded-full bg-brand-blue text-white font-semibold px-4 py-2 text-sm shadow-sm hover:bg-sky-600 hover:shadow-md transition-all"
+            >
+              📍 Ir
+            </a>
           </div>
         ))}
       </section>
