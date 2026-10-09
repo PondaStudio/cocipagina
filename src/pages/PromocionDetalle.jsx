@@ -1,5 +1,6 @@
 import { Link, useParams } from 'react-router-dom'
-import { PROMOCIONES, estaVigente } from '../config/promociones.js'
+import { estaVigente } from '../config/promociones.js'
+import { usePromociones } from '../hooks/usePromociones.js'
 
 function formatoFecha(iso) {
   const [y, m, d] = iso.split('-')
@@ -12,7 +13,12 @@ function formatoFecha(iso) {
 
 export default function PromocionDetalle() {
   const { id } = useParams()
-  const promo = PROMOCIONES.find((p) => p.id === id)
+  const { promociones, loading } = usePromociones()
+  const promo = promociones.find((p) => p.id === id)
+
+  if (loading) {
+    return <p className="mx-auto max-w-2xl px-4 py-16 text-center text-slate-400">Cargando…</p>
+  }
 
   if (!promo) {
     return (

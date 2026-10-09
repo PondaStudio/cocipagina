@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
-import { PROMOCIONES, estaVigente, esPasadaVisible } from '../config/promociones.js'
+import { estaVigente, esPasadaVisible } from '../config/promociones.js'
+import { usePromociones } from '../hooks/usePromociones.js'
 
 function PromoCard({ promo, agotada = false }) {
   return (
@@ -42,8 +43,9 @@ function PromoCard({ promo, agotada = false }) {
 }
 
 export default function Promociones() {
-  const activas = PROMOCIONES.filter((p) => estaVigente(p))
-  const pasadas = PROMOCIONES.filter((p) => esPasadaVisible(p))
+  const { promociones, loading } = usePromociones()
+  const activas = promociones.filter((p) => estaVigente(p))
+  const pasadas = promociones.filter((p) => esPasadaVisible(p))
 
   return (
     <div>
@@ -70,7 +72,9 @@ export default function Promociones() {
         />
         <div className="relative mx-auto max-w-5xl px-4 py-10">
 
-        {activas.length > 0 ? (
+        {loading ? (
+          <p className="text-slate-400">Cargando promociones…</p>
+        ) : activas.length > 0 ? (
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
             {activas.map((promo) => (
               <PromoCard key={promo.id} promo={promo} />

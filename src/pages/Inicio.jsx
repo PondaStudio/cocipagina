@@ -3,10 +3,12 @@ import Footer from '../components/Footer.jsx'
 import EncuestaForm from '../components/EncuestaForm.jsx'
 import PromoCarousel from '../components/PromoCarousel.jsx'
 import PromoPopup from '../components/PromoPopup.jsx'
-import { PROMOCIONES, estaVigente } from '../config/promociones.js'
+import { estaVigente } from '../config/promociones.js'
+import { usePromociones } from '../hooks/usePromociones.js'
 
 export default function Inicio() {
-  const promosActivas = PROMOCIONES.filter((p) => estaVigente(p))
+  const { promociones } = usePromociones()
+  const promosActivas = promociones.filter((p) => estaVigente(p))
   const promosDestacadas = promosActivas.filter((p) => p.destacada)
 
   return (
