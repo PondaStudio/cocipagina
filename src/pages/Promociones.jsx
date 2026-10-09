@@ -62,28 +62,35 @@ export default function Promociones() {
         </div>
       </div>
 
-      <div className="mx-auto max-w-5xl px-4 py-10">
+      <div className="relative overflow-hidden">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 opacity-[0.12] bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: "url('/patterns/columna-azul-blanco.jpg')" }}
+        />
+        <div className="relative mx-auto max-w-5xl px-4 py-10">
 
-      {activas.length > 0 ? (
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-          {activas.map((promo) => (
-            <PromoCard key={promo.id} promo={promo} />
-          ))}
-        </div>
-      ) : (
-        <p className="text-slate-500">No hay promociones vigentes por el momento.</p>
-      )}
-
-      {pasadas.length > 0 && (
-        <div className="mt-14">
-          <h2 className="text-lg font-bold text-slate-400 mb-4">Promociones pasadas</h2>
+        {activas.length > 0 ? (
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-            {pasadas.map((promo) => (
-              <PromoCard key={promo.id} promo={promo} agotada />
+            {activas.map((promo) => (
+              <PromoCard key={promo.id} promo={promo} />
             ))}
           </div>
+        ) : (
+          <p className="text-slate-500">No hay promociones vigentes por el momento.</p>
+        )}
+
+        {pasadas.length > 0 && (
+          <div className="mt-14">
+            <h2 className="text-lg font-bold text-slate-400 mb-4">Promociones pasadas</h2>
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+              {pasadas.map((promo) => (
+                <PromoCard key={promo.id} promo={promo} agotada />
+              ))}
+            </div>
+          </div>
+        )}
         </div>
-      )}
       </div>
     </div>
   )
