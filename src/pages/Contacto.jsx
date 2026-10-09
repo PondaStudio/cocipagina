@@ -13,9 +13,9 @@ function mapsLink(direccion) {
 
 function ContactCard({ icon, label, children }) {
   return (
-    <div className="aspect-square rounded-2xl border border-slate-200 bg-white shadow-sm hover:shadow-md transition-shadow p-4 flex flex-col items-center justify-center text-center gap-1.5">
-      <span className="text-2xl">{icon}</span>
-      <span className="font-bold text-brand-dark text-sm">{label}</span>
+    <div className="aspect-square rounded-2xl border border-slate-200 bg-white shadow-sm hover:shadow-md transition-shadow p-3 flex flex-col items-center justify-center text-center gap-2">
+      <span className="text-5xl sm:text-6xl leading-none">{icon}</span>
+      <span className="font-bold text-brand-dark text-base sm:text-lg">{label}</span>
       {children}
     </div>
   )
@@ -50,7 +50,7 @@ export default function Contacto() {
                 href={waLink(tel, 'Hola, te escribo desde la página de Cocimas Hogar.')}
                 target="_blank"
                 rel="noreferrer"
-                className="text-xs font-mono text-green-700 hover:underline"
+                className="font-mono font-semibold text-sm sm:text-base tracking-tight text-green-700 hover:underline"
               >
                 {tel}
               </a>
@@ -61,7 +61,7 @@ export default function Contacto() {
         <ContactCard icon="🧾" label="Facturación">
           <button
             onClick={() => copiar(FACTURACION_TELEFONO)}
-            className="text-xs font-mono text-slate-600 hover:text-brand-blue mt-1"
+            className="font-mono font-semibold text-sm sm:text-base tracking-tight text-slate-600 hover:text-brand-blue mt-1"
           >
             {copiado === FACTURACION_TELEFONO ? '¡Copiado!' : FACTURACION_TELEFONO}
           </button>
@@ -70,7 +70,7 @@ export default function Contacto() {
         <ContactCard icon="🧑‍💼" label="Recursos Humanos">
           <button
             onClick={() => copiar(RH_TELEFONO)}
-            className="text-xs font-mono text-slate-600 hover:text-brand-blue mt-1"
+            className="font-mono font-semibold text-sm sm:text-base tracking-tight text-slate-600 hover:text-brand-blue mt-1"
           >
             {copiado === RH_TELEFONO ? '¡Copiado!' : RH_TELEFONO}
           </button>

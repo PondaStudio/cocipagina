@@ -5,6 +5,7 @@ export default {
     extend: {
       fontFamily: {
         sans: ['Poppins', 'system-ui', '-apple-system', 'sans-serif'],
+        mono: ['"IBM Plex Mono"', 'ui-monospace', 'monospace'],
       },
       colors: {
         brand: {
