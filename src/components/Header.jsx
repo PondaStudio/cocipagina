@@ -1,11 +1,13 @@
 import { NavLink } from 'react-router-dom'
 
-// Garantías, Contacto y Bolsa de trabajo quedan ocultas del menú por ahora
-// (a petición del dueño) pero sus rutas siguen accesibles por URL directa.
+// Garantías queda oculta del menú por ahora (a petición del dueño) pero su
+// ruta sigue accesible por URL directa.
 const LINKS = [
   { to: '/', label: 'Inicio', end: true },
   { to: '/encuesta', label: 'Encuesta' },
   { to: '/promociones', label: 'Promociones' },
+  { to: '/contacto', label: 'Contacto' },
+  { to: '/trabajo', label: 'Bolsa de trabajo' },
 ]
 
 export default function Header() {
