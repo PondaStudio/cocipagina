@@ -1,10 +1,8 @@
 import { useState } from 'react'
 import { VACANTES } from '../config/vacantes.js'
 
-// TODO(dueño): reemplazar con la URL real del Apps Script Web App una vez
-// desplegado (ver docs/apps-script-bolsa-trabajo.md). Mientras tanto el
-// formulario no envía nada y muestra un aviso.
-const GOOGLE_SCRIPT_URL = 'PEGA_AQUI_TU_URL_DE_APPS_SCRIPT'
+const GOOGLE_SCRIPT_URL =
+  'https://script.google.com/macros/s/AKfycbxHvSxXYsV22QC6wXl1i8fjUpPtWyoxZgqTEJaj4cV_2978aG5wt5-PFb5WGYwYc0jA/exec'
 
 // Número de WhatsApp (RH) al que se abre el chat prellenado con cada
 // postulación. El navegador no puede enviar WhatsApp 100% automático sin una
