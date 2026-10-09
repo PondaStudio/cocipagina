@@ -3,10 +3,10 @@ import PostulacionForm from '../components/PostulacionForm.jsx'
 
 function contactoLink(contacto, vacante) {
   if (contacto.tipo === 'whatsapp') {
-    const text = encodeURIComponent(`Hola, me interesa la vacante de ${vacante.puesto} (${vacante.sucursal}).`)
+    const text = encodeURIComponent(`Hola, me interesa la vacante de ${vacante.puesto}.`)
     return `https://wa.me/${contacto.valor.replace(/\D/g, '')}?text=${text}`
   }
-  const subject = encodeURIComponent(`Vacante: ${vacante.puesto} (${vacante.sucursal})`)
+  const subject = encodeURIComponent(`Vacante: ${vacante.puesto}`)
   return `mailto:${contacto.valor}?subject=${subject}`
 }
 
@@ -35,10 +35,7 @@ export default function Trabajo() {
             key={i}
             className="rounded-2xl border border-slate-200 bg-white shadow-sm hover:shadow-md transition-shadow px-5 py-5"
           >
-            <div>
-              <h2 className="font-bold text-lg text-brand-dark">{v.puesto}</h2>
-              <p className="text-sm text-slate-500">{v.sucursal}</p>
-            </div>
+            <h2 className="font-bold text-lg text-brand-dark">{v.puesto}</h2>
 
             <ul className="mt-3 space-y-1">
               {v.requisitos.map((r) => (
@@ -61,11 +58,9 @@ export default function Trabajo() {
         ))}
       </div>
 
-      <p className="text-xs text-slate-400 mt-8 mb-8">
-        Vacantes de ejemplo — actualízalas en src/config/vacantes.js.
-      </p>
-
-      <PostulacionForm />
+      <div className="mt-8 mb-8">
+        <PostulacionForm />
+      </div>
       </div>
     </div>
   )
