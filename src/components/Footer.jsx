@@ -28,6 +28,7 @@ export default function Footer() {
           </a>
         </div>
         <p>© {new Date().getFullYear()} Cocimas Hogar. Todos los derechos reservados.</p>
+        <p className="text-xs text-slate-400">Página realizada por PondaStudio 2026</p>
       </div>
     </footer>
   )
