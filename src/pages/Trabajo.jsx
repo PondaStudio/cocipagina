@@ -1,4 +1,5 @@
 import { VACANTES } from '../config/vacantes.js'
+import PostulacionForm from '../components/PostulacionForm.jsx'
 
 function contactoLink(contacto, vacante) {
   if (contacto.tipo === 'whatsapp') {
@@ -65,9 +66,11 @@ export default function Trabajo() {
         ))}
       </div>
 
-      <p className="text-xs text-slate-400 mt-8">
+      <p className="text-xs text-slate-400 mt-8 mb-8">
         Vacantes de ejemplo — actualízalas en src/config/vacantes.js.
       </p>
+
+      <PostulacionForm />
       </div>
     </div>
   )

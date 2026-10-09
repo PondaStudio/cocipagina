@@ -10,7 +10,6 @@ export const SUCURSALES = [
     direccion: 'Javier Mina 443, Guadalajara, Jal.',
     horario: 'Lun a Sáb 10:00–20:00, Dom 11:00–17:00',
     mapsReviewUrl: 'https://maps.app.goo.gl/SqYHG9izt7v41yFY8',
-    facturacionTelefono: '3334718271',
     vendedoras: [
       { nombre: 'Vendedora ejemplo 1', whatsapp: '523300000001' },
       { nombre: 'Vendedora ejemplo 2', whatsapp: '523300000002' },
@@ -22,7 +21,6 @@ export const SUCURSALES = [
     direccion: 'Javier Mina 453-B, Guadalajara, Jal.',
     horario: 'Lun a Sáb 10:00–20:00, Dom 11:00–17:00',
     mapsReviewUrl: 'https://maps.app.goo.gl/SqYHG9izt7v41yFY8',
-    facturacionTelefono: '3334718271',
     vendedoras: [
       { nombre: 'Vendedora ejemplo 1', whatsapp: '523300000003' },
       { nombre: 'Vendedora ejemplo 2', whatsapp: '523300000004' },
@@ -34,7 +32,6 @@ export const SUCURSALES = [
     direccion: 'Javier Mina 511-A, Guadalajara, Jal.',
     horario: 'Lun a Sáb 10:00–20:00, Dom 11:00–17:00',
     mapsReviewUrl: 'https://maps.app.goo.gl/SqYHG9izt7v41yFY8',
-    facturacionTelefono: '3334718271',
     vendedoras: [
       { nombre: 'Vendedora ejemplo 1', whatsapp: '523300000005' },
     ],
@@ -45,7 +42,6 @@ export const SUCURSALES = [
     direccion: 'Leona Vicario 168, Guadalajara, Jal.',
     horario: 'Lun a Sáb 10:00–20:00, Dom 11:00–17:00',
     mapsReviewUrl: 'https://maps.app.goo.gl/SqYHG9izt7v41yFY8',
-    facturacionTelefono: '3331774615',
     vendedoras: [
       { nombre: 'Vendedora ejemplo 1', whatsapp: '523300000006' },
       { nombre: 'Vendedora ejemplo 2', whatsapp: '523300000007' },
@@ -57,7 +53,6 @@ export const SUCURSALES = [
     direccion: 'Leona Vicario 147, Guadalajara, Jal.',
     horario: 'Lun a Sáb 10:00–20:00, Dom 11:00–17:00',
     mapsReviewUrl: 'https://maps.app.goo.gl/SqYHG9izt7v41yFY8',
-    facturacionTelefono: '3331774615',
     vendedoras: [
       { nombre: 'Vendedora ejemplo 1', whatsapp: '523300000008' },
     ],
@@ -68,7 +63,6 @@ export const SUCURSALES = [
     direccion: 'Juan Díaz Covarrubias 265, Guadalajara, Jal.',
     horario: 'Lun a Sáb 10:00–20:00, Dom 11:00–17:00',
     mapsReviewUrl: 'https://maps.app.goo.gl/SqYHG9izt7v41yFY8',
-    facturacionTelefono: '3334718271',
     vendedoras: [
       { nombre: 'Vendedora ejemplo 1', whatsapp: '523300000009' },
     ],
@@ -81,3 +75,7 @@ export const REDES_SOCIALES = {
 }
 
 export const GOOGLE_REVIEW_DEFAULT_URL = 'https://maps.app.goo.gl/SqYHG9izt7v41yFY8'
+
+export const VENTAS_TELEFONOS = ['3331774615', '3311359624']
+export const FACTURACION_TELEFONO = '3322417798'
+export const RH_TELEFONO = '3319423903'
