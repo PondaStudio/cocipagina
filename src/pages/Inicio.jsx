@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom'
-import Footer from '../components/Footer.jsx'
 import EncuestaForm from '../components/EncuestaForm.jsx'
 import PromoCarousel from '../components/PromoCarousel.jsx'
 import PromoPopup from '../components/PromoPopup.jsx'
@@ -96,8 +95,6 @@ export default function Inicio() {
           </div>
         </section>
       )}
-
-      <Footer />
     </div>
   )
 }
