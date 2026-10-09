@@ -1,6 +1,7 @@
 // TODO(dueño): agrega, edita o quita promociones aquí. `vigenciaHasta` decide
 // automáticamente si la promo se muestra como activa o pasa a "Promociones
-// pasadas" en la página de Promociones.
+// pasadas" en la página de Promociones. Marca `destacada: true` en las que
+// quieras que aparezcan en la ventana emergente de Inicio.
 export const PROMOCIONES = [
   {
     id: 'hotspot-15',

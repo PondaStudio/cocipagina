@@ -2,13 +2,16 @@ import { Link } from 'react-router-dom'
 import Footer from '../components/Footer.jsx'
 import EncuestaForm from '../components/EncuestaForm.jsx'
 import PromoCarousel from '../components/PromoCarousel.jsx'
+import PromoPopup from '../components/PromoPopup.jsx'
 import { PROMOCIONES, estaVigente } from '../config/promociones.js'
 
 export default function Inicio() {
   const promosActivas = PROMOCIONES.filter((p) => estaVigente(p))
+  const promosDestacadas = promosActivas.filter((p) => p.destacada)
 
   return (
     <div className="flex flex-col">
+      <PromoPopup promos={promosDestacadas} />
       <section className="relative overflow-hidden bg-gradient-to-br from-sky-500 via-brand-blue to-blue-700 text-white">
         <div
           aria-hidden="true"

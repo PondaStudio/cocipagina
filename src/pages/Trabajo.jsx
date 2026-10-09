@@ -35,14 +35,9 @@ export default function Trabajo() {
             key={i}
             className="rounded-2xl border border-slate-200 bg-white shadow-sm hover:shadow-md transition-shadow px-5 py-5"
           >
-            <div className="flex items-start justify-between gap-3 flex-wrap">
-              <div>
-                <h2 className="font-bold text-lg text-brand-dark">{v.puesto}</h2>
-                <p className="text-sm text-slate-500">{v.sucursal}</p>
-              </div>
-              <span className="rounded-full bg-brand-yellow/20 text-yellow-800 text-sm font-semibold px-3 py-1 whitespace-nowrap">
-                {v.salario}
-              </span>
+            <div>
+              <h2 className="font-bold text-lg text-brand-dark">{v.puesto}</h2>
+              <p className="text-sm text-slate-500">{v.sucursal}</p>
             </div>
 
             <ul className="mt-3 space-y-1">
