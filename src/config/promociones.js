@@ -77,6 +77,7 @@ export const PROMOCIONES = [
     noAplica: 'No aplica en chocomileras, licuadora 4108, licuadora 869-16 ni en aspas marca Oster.',
     vigenciaDesde: '2026-10-06',
     vigenciaHasta: '2026-10-31',
+    destacada: true,
   },
   {
     id: 'tfal-licuadoras-10',
@@ -89,6 +90,7 @@ export const PROMOCIONES = [
     noAplica: 'Otros productos T-fal fuera de licuadoras.',
     vigenciaDesde: '2026-10-04',
     vigenciaHasta: '2026-10-31',
+    destacada: true,
   },
   {
     id: 'tfal-sartenes-10',
@@ -101,6 +103,7 @@ export const PROMOCIONES = [
     noAplica: 'Otros productos T-fal fuera del juego de sartenes.',
     vigenciaDesde: '2026-10-04',
     vigenciaHasta: '2026-10-31',
+    destacada: true,
   },
   {
     id: 'tfal-baterias-10',
@@ -113,6 +116,7 @@ export const PROMOCIONES = [
     noAplica: 'Otros productos T-fal fuera de baterías de cocina.',
     vigenciaDesde: '2026-10-04',
     vigenciaHasta: '2026-10-31',
+    destacada: true,
   },
 ]
 
