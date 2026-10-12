@@ -19,7 +19,6 @@ const VACIO = {
   vigenciaDesde: '',
   vigenciaHasta: '',
   destacada: false,
-  orden: 0,
 }
 
 function PromoForm({ inicial, onGuardado, onCancelar }) {

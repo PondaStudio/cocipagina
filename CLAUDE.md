@@ -32,11 +32,15 @@ La encuesta de satisfacción escribe directo a un Google Sheet (no Supabase, no 
 
 `GOOGLE_SHEETS_API_KEY` (GitHub Secret) no se usa: una API key simple de Google Sheets solo permite **lectura** de hojas públicas, no escritura — no sirve para este flujo. Si en el futuro se requiere leer datos desde el cliente con esa key, evaluar de nuevo si conviene exponerla (aunque sea restringida) o pasar por el mismo Apps Script.
 
-## Login y promociones: Supabase
+## Promociones: fuente de verdad es extras.app, la web solo lee
 
-El login de `/admin` y el CRUD de promociones (antes en `src/config/promociones.js`, hoy solo quedan ahí los helpers `estaVigente`/`esPasadaVisible`) usan **Supabase** (proyecto `cocipagina`, organización `Pondaxems`, ref `bwvkmdjogvaueinccvpf`): tabla `promociones` con RLS (lectura pública, escritura solo autenticado) + bucket de Storage `promos` para las imágenes que se suban desde el editor. El cliente vive en `src/lib/supabaseClient.js` y lee `VITE_SUPABASE_URL` / `VITE_SUPABASE_ANON_KEY` (variables de build de Vite, no secretas del lado servidor — la anon key es pública por diseño, la seguridad la da RLS). En local van en `.env` (gitignored); en el deploy, en GitHub Secrets del mismo nombre, inyectadas en el paso `Build` de `.github/workflows/deploy.yml`.
+El control real de promociones (alta, estados de producción: estrellas, carteles de pasillo, cartel grande, inspección, retiro) vive en **extras.app**, el sistema interno de CocimasApp (local, sin repo en GitHub por seguridad — lo mantiene otro Claude en la computadora del dueño). La web (`src/pages/Promociones.jsx`, `Inicio.jsx`, `PromocionDetalle.jsx`, vía `src/hooks/usePromociones.js` y `src/data/promocionesApi.js`) solo **lee** la tabla `public.promociones` de ese mismo proyecto de Supabase: `extras-app`, organización `Pondaxems`, ref `fomtfciuuemprepktsfx`. La policy de lectura pública (`anon`) solo expone filas con `imagen_principal_url` no nula; la web decide qué mostrar filtrando además por vigencia (`estaVigente`/`esPasadaVisible` en `src/config/promociones.js`) y por `destacada` (popup de Inicio).
 
-Los usuarios que pueden iniciar sesión en `/admin` se crean manualmente en el dashboard de Supabase (Authentication → Users) — el agente nunca debe crear ni conocer la contraseña del dueño.
+El proyecto de Supabase aparte que se había creado para esto (`cocipagina`, ref `bwvkmdjogvaueinccvpf`) quedó sin usar — dar de baja si no se reutiliza.
+
+Queda también, como respaldo, un login/editor en `/admin` (`src/pages/Admin.jsx`, `src/components/AdminPromociones.jsx`) que escribe directo a esa misma tabla de extras-app vía Supabase Auth — solo funciona si el usuario que inicia sesión existe en `usuarios` de extras.app con un rol de nivel ≤4 (lo exige la policy `promociones_escritura_rh`). El flujo normal es dar de alta/editar desde extras.app.
+
+El cliente de Supabase vive en `src/lib/supabaseClient.js` y lee `VITE_SUPABASE_URL` / `VITE_SUPABASE_ANON_KEY` (variables de build de Vite, no secretas del lado servidor — la anon key es pública por diseño, la seguridad la da RLS). En local van en `.env` (gitignored); en el deploy, en GitHub Secrets del mismo nombre, inyectadas en el paso `Build` de `.github/workflows/deploy.yml`.
 
 Esto es independiente de la encuesta, que sigue sin Supabase (ver sección anterior).
 

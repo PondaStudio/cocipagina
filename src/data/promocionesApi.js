@@ -5,7 +5,7 @@ function mapRow(row) {
     id: row.id,
     titulo: row.titulo,
     marca: row.marca,
-    imagen: row.imagen_path,
+    imagen: row.imagen_principal_url,
     descuento: row.descuento,
     descripcion: row.descripcion,
     aplica: row.aplica,
@@ -13,7 +13,6 @@ function mapRow(row) {
     vigenciaDesde: row.vigencia_desde,
     vigenciaHasta: row.vigencia_hasta,
     destacada: row.destacada,
-    orden: row.orden,
   }
 }
 
@@ -22,7 +21,6 @@ export async function fetchPromociones() {
   const { data, error } = await supabase
     .from('promociones')
     .select('*')
-    .order('orden', { ascending: true })
     .order('vigencia_desde', { ascending: false })
   if (error) throw error
   return data.map(mapRow)
@@ -34,7 +32,7 @@ export async function crearPromocion(promo) {
     .insert({
       titulo: promo.titulo,
       marca: promo.marca,
-      imagen_path: promo.imagen,
+      imagen_principal_url: promo.imagen,
       descuento: promo.descuento,
       descripcion: promo.descripcion,
       aplica: promo.aplica,
@@ -42,7 +40,6 @@ export async function crearPromocion(promo) {
       vigencia_desde: promo.vigenciaDesde,
       vigencia_hasta: promo.vigenciaHasta,
       destacada: promo.destacada ?? false,
-      orden: promo.orden ?? 0,
     })
     .select()
     .single()
@@ -56,7 +53,7 @@ export async function actualizarPromocion(id, promo) {
     .update({
       titulo: promo.titulo,
       marca: promo.marca,
-      imagen_path: promo.imagen,
+      imagen_principal_url: promo.imagen,
       descuento: promo.descuento,
       descripcion: promo.descripcion,
       aplica: promo.aplica,
@@ -64,7 +61,6 @@ export async function actualizarPromocion(id, promo) {
       vigencia_desde: promo.vigenciaDesde,
       vigencia_hasta: promo.vigenciaHasta,
       destacada: promo.destacada ?? false,
-      orden: promo.orden ?? 0,
     })
     .eq('id', id)
     .select()
@@ -81,8 +77,8 @@ export async function borrarPromocion(id) {
 export async function subirImagenPromocion(file) {
   const ext = file.name.split('.').pop()
   const nombre = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}.${ext}`
-  const { error } = await supabase.storage.from('promos').upload(nombre, file)
+  const { error } = await supabase.storage.from('promociones').upload(nombre, file)
   if (error) throw error
-  const { data } = supabase.storage.from('promos').getPublicUrl(nombre)
+  const { data } = supabase.storage.from('promociones').getPublicUrl(nombre)
   return data.publicUrl
 }
