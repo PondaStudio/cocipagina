@@ -6,7 +6,7 @@ const ITEMS = [
   { to: '/', label: 'Inicio', end: true, icon: '🏠' },
   { to: '/encuesta', label: 'Encuesta', icon: '⭐' },
   { to: '/promociones', label: 'Promos', icon: '🏷️' },
-  { to: '/contacto', label: 'Contrataciones', icon: '📞' },
+  { to: '/contacto', label: 'Contacto', icon: '📞' },
   { to: '/trabajo', label: 'Empleo', icon: '💼' },
 ]
 
