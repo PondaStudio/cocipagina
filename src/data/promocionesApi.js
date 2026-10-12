@@ -16,11 +16,25 @@ function mapRow(row) {
   }
 }
 
+const COLUMNAS = [
+  'id',
+  'titulo',
+  'marca',
+  'imagen_principal_url',
+  'descuento',
+  'descripcion',
+  'aplica',
+  'no_aplica',
+  'vigencia_desde',
+  'vigencia_hasta',
+  'destacada',
+].join(', ')
+
 export async function fetchPromociones() {
   if (!supabase) return []
   const { data, error } = await supabase
     .from('promociones')
-    .select('*')
+    .select(COLUMNAS)
     .order('vigencia_desde', { ascending: false })
   if (error) throw error
   return data.map(mapRow)
