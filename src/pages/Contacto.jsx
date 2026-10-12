@@ -88,7 +88,7 @@ export default function Contacto() {
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-10">
-      <h1 className="text-2xl font-bold text-brand-dark">Contacto</h1>
+      <h1 className="text-2xl font-bold text-brand-dark">Contrataciones</h1>
       <p className="text-slate-500 mt-1 mb-8">
         Escríbenos por WhatsApp para ventas, o contáctanos para facturación y recursos humanos.
       </p>
