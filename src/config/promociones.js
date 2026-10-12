@@ -106,6 +106,18 @@ export const PROMOCIONES = [
     destacada: true,
   },
   {
+    id: 'hotspot-ultra-15',
+    titulo: 'Descuento en línea Ultra HotSpot',
+    marca: 'HotSpot',
+    imagen: '/promos/promo-hotspot-ultra-15.jpg',
+    descuento: '15% de descuento',
+    descripcion: 'Descuento en toda la línea ULTRA de la marca HotSpot.',
+    aplica: 'Línea ULTRA de productos HotSpot.',
+    noAplica: 'Aplican restricciones; consulta en tienda.',
+    vigenciaDesde: '2026-10-10',
+    vigenciaHasta: '2026-10-31',
+  },
+  {
     id: 'tfal-baterias-10',
     titulo: 'Baterías de cocina T-fal',
     marca: 'T-fal',
