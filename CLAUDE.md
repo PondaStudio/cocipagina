@@ -38,9 +38,9 @@ El control real de promociones (alta, estados de producción: estrellas, cartele
 
 El proyecto de Supabase aparte que se había creado para esto (`cocipagina`, ref `bwvkmdjogvaueinccvpf`) quedó sin usar — dar de baja si no se reutiliza.
 
-Queda también, como respaldo, un login/editor en `/admin` (`src/pages/Admin.jsx`, `src/components/AdminPromociones.jsx`) que escribe directo a esa misma tabla de extras-app vía Supabase Auth — solo funciona si el usuario que inicia sesión existe en `usuarios` de extras.app con un rol de nivel ≤4 (lo exige la policy `promociones_escritura_rh`). El flujo normal es dar de alta/editar desde extras.app.
+**No hay login ni `/admin` en la web.** Se armó un editor de respaldo ahí (con Supabase Auth) pero el dueño pidió quitarlo por seguridad, para no abrir en el sitio público una puerta más hacia las cuentas de extras.app (datos de nómina, empleados, etc. en ese mismo proyecto). La web solo hace `select` de solo lectura con la anon key — no importa el cliente de Supabase Auth, no hay rutas de login, no hay CRUD desde la web. Dar de alta/editar promociones se hace únicamente desde extras.app. No reintroducir un login en este repo sin confirmarlo explícitamente con el dueño primero.
 
-El cliente de Supabase vive en `src/lib/supabaseClient.js` y lee `VITE_SUPABASE_URL` / `VITE_SUPABASE_ANON_KEY` (variables de build de Vite, no secretas del lado servidor — la anon key es pública por diseño, la seguridad la da RLS). En local van en `.env` (gitignored); en el deploy, en GitHub Secrets del mismo nombre, inyectadas en el paso `Build` de `.github/workflows/deploy.yml`.
+El cliente de Supabase vive en `src/lib/supabaseClient.js` (con `persistSession: false`, ya que no se usa auth) y lee `VITE_SUPABASE_URL` / `VITE_SUPABASE_ANON_KEY` (variables de build de Vite, no secretas del lado servidor — la anon key es pública por diseño, la seguridad la da RLS: solo expone `promociones` con imagen cargada). En local van en `.env` (gitignored); en el deploy, en GitHub Secrets del mismo nombre, inyectadas en el paso `Build` de `.github/workflows/deploy.yml`.
 
 Esto es independiente de la encuesta, que sigue sin Supabase (ver sección anterior).
 
