@@ -6,7 +6,7 @@ const LINKS = [
   { to: '/', label: 'Inicio', end: true },
   { to: '/encuesta', label: 'Encuesta' },
   { to: '/promociones', label: 'Promociones' },
-  { to: '/contacto', label: 'Contrataciones' },
+  { to: '/contacto', label: 'Contacto' },
   { to: '/trabajo', label: 'Bolsa de trabajo' },
 ]
 
