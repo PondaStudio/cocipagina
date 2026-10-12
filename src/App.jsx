@@ -7,6 +7,7 @@ import PromocionDetalle from './pages/PromocionDetalle.jsx'
 import Garantias from './pages/Garantias.jsx'
 import Contacto from './pages/Contacto.jsx'
 import Trabajo from './pages/Trabajo.jsx'
+import Admin from './pages/Admin.jsx'
 import NotFound from './pages/NotFound.jsx'
 
 export default function App() {
@@ -20,6 +21,7 @@ export default function App() {
         <Route path="/garantias" element={<Garantias />} />
         <Route path="/contacto" element={<Contacto />} />
         <Route path="/trabajo" element={<Trabajo />} />
+        <Route path="/admin" element={<Admin />} />
         <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>
