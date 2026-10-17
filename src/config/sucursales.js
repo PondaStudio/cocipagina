@@ -39,8 +39,8 @@ export const SUCURSALES = [
   },
   {
     codigo: 'JDC265',
-    nombre: 'Juan Díaz Covarrubias 265',
-    direccion: 'Juan Díaz Covarrubias 265, Guadalajara, Jal.',
+    nombre: 'Juan Díaz Covarrubias 142',
+    direccion: 'Juan Díaz Covarrubias 142, Guadalajara, Jal.',
     horario: 'Lun a Sáb 8:00–18:00',
     mapsReviewUrl: 'https://maps.app.goo.gl/SqYHG9izt7v41yFY8',
   },
