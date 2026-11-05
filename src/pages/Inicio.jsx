@@ -4,15 +4,27 @@ import PromoCarousel from '../components/PromoCarousel.jsx'
 import PromoPopup from '../components/PromoPopup.jsx'
 import { estaVigente } from '../config/promociones.js'
 import { usePromociones } from '../hooks/usePromociones.js'
+import { REDES_SOCIALES } from '../config/sucursales.js'
 
 export default function Inicio() {
   const { promociones } = usePromociones()
   const promosActivas = promociones.filter((p) => estaVigente(p))
   const promosDestacadas = promosActivas.filter((p) => p.destacada)
+  const slidesPopup = [
+    ...promosDestacadas,
+    {
+      id: 'whatsapp-canal',
+      tipo: 'whatsapp-canal',
+      imagen: '/whatsapp-canal-qr.png',
+      titulo: 'Únete a nuestro canal de WhatsApp',
+      descripcion: 'Entérate primero de promociones y novedades.',
+      enlace: REDES_SOCIALES.whatsappCanal,
+    },
+  ]
 
   return (
     <div className="flex flex-col">
-      <PromoPopup promos={promosDestacadas} />
+      <PromoPopup promos={slidesPopup} />
       <section className="relative overflow-hidden bg-gradient-to-br from-sky-500 via-brand-blue to-blue-700 text-white">
         <div
           aria-hidden="true"
@@ -47,10 +59,12 @@ export default function Inicio() {
             Artículos para el hogar y cocina. Elige una opción para continuar.
           </p>
           <a
-            href="#encuesta"
+            href={REDES_SOCIALES.whatsappCanal}
+            target="_blank"
+            rel="noreferrer"
             className="mt-2 inline-flex items-center justify-center gap-2 rounded-full bg-white text-brand-blue font-bold text-lg px-8 py-4 shadow-xl shadow-black/20 hover:shadow-2xl hover:-translate-y-1 active:translate-y-0 transition-all"
           >
-            Calificar mi experiencia
+            Únete al canal
             <span aria-hidden="true">→</span>
           </a>
         </div>

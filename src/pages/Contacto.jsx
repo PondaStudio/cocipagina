@@ -1,5 +1,11 @@
 import { useState } from 'react'
-import { SUCURSALES, VENTAS_TELEFONOS, FACTURACION_TELEFONO, RH_TELEFONO } from '../config/sucursales.js'
+import {
+  SUCURSALES,
+  VENTAS_TELEFONOS,
+  FACTURACION_TELEFONO,
+  RH_TELEFONO,
+  REDES_SOCIALES,
+} from '../config/sucursales.js'
 
 function waLink(numero, mensaje) {
   const clean = numero.replace(/\D/g, '')
@@ -92,6 +98,28 @@ export default function Contacto() {
       <p className="text-slate-500 mt-1 mb-8">
         Escríbenos por WhatsApp para ventas, o contáctanos para facturación y recursos humanos.
       </p>
+
+      <div className="rounded-2xl border border-green-200 bg-green-50 px-5 py-5 sm:px-8 sm:py-6 mb-8 flex flex-col sm:flex-row items-center gap-5 sm:gap-6">
+        <img
+          src="/whatsapp-canal-qr.png"
+          alt="Código QR del canal de WhatsApp de Cocimas Hogar"
+          className="h-28 w-28 sm:h-32 sm:w-32 rounded-xl shadow-sm shrink-0"
+        />
+        <div className="text-center sm:text-left flex-1">
+          <h2 className="font-bold text-brand-dark text-lg">Únete a nuestro canal de WhatsApp</h2>
+          <p className="text-slate-500 text-sm mt-1">
+            Entérate primero de promociones y novedades.
+          </p>
+          <a
+            href={REDES_SOCIALES.whatsappCanal}
+            target="_blank"
+            rel="noreferrer"
+            className="mt-3 inline-flex items-center justify-center gap-2 rounded-xl bg-green-600 text-white font-semibold px-5 py-2.5 shadow-sm hover:bg-green-700 transition-colors"
+          >
+            Únete al canal →
+          </a>
+        </div>
+      </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-10">
         <ContactCard icon={<IconWhatsApp className="h-8 w-8" />} label="Ventas">
