@@ -49,6 +49,7 @@ export const SUCURSALES = [
 export const REDES_SOCIALES = {
   facebook: 'https://www.facebook.com/profile.php?id=61581038925331',
   instagram: 'https://www.instagram.com/cocimashogargdl/',
+  whatsappCanal: 'https://whatsapp.com/channel/0029Vb9Tv0h0QealM18OJi26',
 }
 
 export const GOOGLE_REVIEW_DEFAULT_URL = 'https://maps.app.goo.gl/SqYHG9izt7v41yFY8'
