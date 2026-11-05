@@ -1,30 +1,37 @@
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import EncuestaForm from '../components/EncuestaForm.jsx'
 import PromoCarousel from '../components/PromoCarousel.jsx'
 import PromoPopup from '../components/PromoPopup.jsx'
+import CanalPopup from '../components/CanalPopup.jsx'
 import { estaVigente } from '../config/promociones.js'
 import { usePromociones } from '../hooks/usePromociones.js'
 import { REDES_SOCIALES } from '../config/sucursales.js'
+
+const CANAL_VISTO_KEY = 'cocimas_popup_canal_visto'
 
 export default function Inicio() {
   const { promociones } = usePromociones()
   const promosActivas = promociones.filter((p) => estaVigente(p))
   const promosDestacadas = promosActivas.filter((p) => p.destacada)
-  const slidesPopup = [
-    ...promosDestacadas,
-    {
-      id: 'whatsapp-canal',
-      tipo: 'whatsapp-canal',
-      imagen: '/whatsapp-canal-qr.png',
-      titulo: 'Únete a nuestro canal de WhatsApp',
-      descripcion: 'Entérate primero de promociones y novedades.',
-      enlace: REDES_SOCIALES.whatsappCanal,
-    },
-  ]
+
+  const [canalCerrado, setCanalCerrado] = useState(false)
+
+  useEffect(() => {
+    try {
+      if (sessionStorage.getItem(CANAL_VISTO_KEY)) setCanalCerrado(true)
+    } catch {
+      // sin sessionStorage asumimos que el popup del canal aún no se vio
+    }
+  }, [])
 
   return (
     <div className="flex flex-col">
-      <PromoPopup promos={slidesPopup} />
+      {!canalCerrado ? (
+        <CanalPopup enlace={REDES_SOCIALES.whatsappCanal} onCerrar={() => setCanalCerrado(true)} />
+      ) : (
+        <PromoPopup promos={promosDestacadas} />
+      )}
       <section className="relative overflow-hidden bg-gradient-to-br from-sky-500 via-brand-blue to-blue-700 text-white">
         <div
           aria-hidden="true"
