@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
-const VISTO_KEY = 'cocimas_popup_promos_visto'
+const VISTO_KEY = 'cocimas_popup_promos_destacadas_visto'
 
 export default function PromoPopup({ promos }) {
   const [visible, setVisible] = useState(false)
