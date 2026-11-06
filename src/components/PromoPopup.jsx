@@ -29,7 +29,6 @@ export default function PromoPopup({ promos }) {
   if (!visible || promos.length === 0) return null
 
   const promo = promos[index]
-  const esCanal = promo.tipo === 'whatsapp-canal'
 
   return (
     <div
@@ -48,52 +47,27 @@ export default function PromoPopup({ promos }) {
           ×
         </button>
 
-        {esCanal ? (
-          <a
-            href={promo.enlace}
-            target="_blank"
-            rel="noreferrer"
-            onClick={cerrar}
-            className="block"
-          >
-            <div className="aspect-square sm:aspect-[4/3] bg-green-50 relative flex items-center justify-center p-8 sm:p-10">
-              <img
-                src={promo.imagen}
-                alt="Código QR del canal de WhatsApp"
-                className="h-full w-auto object-contain"
-              />
-            </div>
-            <div className="p-4 sm:p-6 text-center">
-              <span className="inline-block rounded-full bg-green-100 text-green-700 text-xs sm:text-sm font-bold px-2.5 sm:px-3 py-1 sm:py-1.5">
-                WhatsApp
-              </span>
-              <p className="font-semibold text-brand-dark leading-snug mt-2 text-base sm:text-xl">{promo.titulo}</p>
-              <p className="text-slate-500 text-sm mt-1">{promo.descripcion}</p>
-            </div>
-          </a>
-        ) : (
-          <Link to="/promociones" onClick={cerrar} className="block">
-            <div className="aspect-square sm:aspect-[4/3] bg-slate-100 relative">
-              <img
-                src={promo.imagen}
-                aria-hidden="true"
-                alt=""
-                className="absolute inset-0 h-full w-full object-cover scale-110 blur-xl opacity-60"
-              />
-              <img
-                src={promo.imagen}
-                alt={promo.titulo}
-                className="relative h-full w-full object-contain"
-              />
-            </div>
-            <div className="p-4 sm:p-6">
-              <span className="inline-block rounded-full bg-brand-blue/10 text-brand-blue text-xs sm:text-sm font-bold px-2.5 sm:px-3 py-1 sm:py-1.5">
-                {promo.descuento}
-              </span>
-              <p className="font-semibold text-brand-dark leading-snug mt-2 text-base sm:text-xl">{promo.titulo}</p>
-            </div>
-          </Link>
-        )}
+        <Link to="/promociones" onClick={cerrar} className="block">
+          <div className="aspect-square sm:aspect-[4/3] bg-slate-100 relative">
+            <img
+              src={promo.imagen}
+              aria-hidden="true"
+              alt=""
+              className="absolute inset-0 h-full w-full object-cover scale-110 blur-xl opacity-60"
+            />
+            <img
+              src={promo.imagen}
+              alt={promo.titulo}
+              className="relative h-full w-full object-contain"
+            />
+          </div>
+          <div className="p-4 sm:p-6">
+            <span className="inline-block rounded-full bg-brand-blue/10 text-brand-blue text-xs sm:text-sm font-bold px-2.5 sm:px-3 py-1 sm:py-1.5">
+              {promo.descuento}
+            </span>
+            <p className="font-semibold text-brand-dark leading-snug mt-2 text-base sm:text-xl">{promo.titulo}</p>
+          </div>
+        </Link>
 
         {promos.length > 1 && (
           <div className="flex justify-center gap-1.5 sm:gap-2 pb-4 sm:pb-6">
